@@ -1,0 +1,151 @@
+.storePanel {
+  padding: 1px 31px;
+  z-index: 1;
+  display: grid;
+  grid-template-columns:
+  minmax(auto, 215px)
+  minmax(330px, auto)
+  minmax(auto, 288px)
+  minmax(min-content, max-content);
+  align-content: stretch;
+  align-items: stretch;
+  height: 72px;
+  grid-gap: 10px;
+  background-color: #2e2e2e;
+  justify-content: stretch;
+}
+
+.logo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #f62f5e;
+  letter-spacing: 4px;
+  padding-top: 21px;
+}
+
+.storeMenu {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  justify-content:space-around;
+  margin-right: 0px;
+
+}
+
+.storeMenu > a {
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  padding-top: 28px;
+}
+.burger{
+  display: none;
+  padding-top:18px;
+}
+.burger>img{
+  width:35px;
+  height: auto;
+}
+.searchInput {
+  width: 260px;
+  position: relative;
+  padding-top: 19px;
+  padding-left: 3px;
+}
+
+.searchInput>input {
+  padding: 8px 40px 10px 44px;
+  color: white;
+  border-radius: 20px;
+  border: 0px;
+  width: 260px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  background-color: #969696;
+}
+
+.searchInput>input::placeholder {
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  margin-top: 3px;
+}
+.searchIcon {
+  position: absolute;
+  top: 27px;
+  left: 16px;
+  width: 20px;
+  height: auto;
+}
+.searchButton{
+  display: none;
+  padding: 26px 10px 0 10px;
+  text-align: right
+}
+.searchButton > img{
+  width:20px;
+  height: auto;
+}
+.closeSearchInput {
+  position: absolute;
+  top: 27px;
+  right: 7px;
+  width:20px;
+  height:auto;
+}
+
+.cartBag2 {
+  padding-left: 2px;
+  padding-top: 18px;
+  width: 33px;
+  display: grid;
+  grid-template-columns: auto;
+  position: relative;
+}
+
+.cartBag2>span {
+  position: absolute;
+  top: 16px;
+  right: -3px;
+  background-color: #fff;
+  color: #f62f5e;
+  width: 24px;
+  height: 24px;
+  border-radius: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  padding-top: 2px;
+  padding-right: 1px;
+}
+
+.cartBag2>img {
+  width: 20px;
+  height: auto;
+  margin-left: 0px;
+  margin-top: 9px;
+}
+@media screen and (max-width: 950px){
+  .searchButton{
+    display: block;
+  }
+  .searchInput{
+    display: none;
+  }
+}
+@media screen and (max-width: 700px){
+  .storePanel{
+    grid-template-columns: 1fr 35px;
+  }
+  .searchButton,
+  .cartBag2,
+  .storeMenu{
+    display: none;
+  }
+  .burger{
+    display: block;
+  }
+}

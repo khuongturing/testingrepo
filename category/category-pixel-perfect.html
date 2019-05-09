@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SHOPMATE - Category</title>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:100,300,700' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet'>
+  <link rel='stylesheet' href='css/00-category-main.css'>
+  <link rel='stylesheet' href='css/01-user-panel.css'>
+  <link rel='stylesheet' href='css/02-store-panel.css'>
+  <link rel='stylesheet' href='css/03-main-banner.css'>
+  <link rel='stylesheet' href='css/04-catalog-layout.css'>
+  <link rel='stylesheet' href='css/05-selector-panel.css'>
+  <link rel='stylesheet' href='css/06-sel-panel-color-picker.css'>
+  <link rel='stylesheet' href='css/07-sel-panel-size-selector.css'>
+  <link rel='stylesheet' href='css/08-sel-panel-price-range.css'>
+  <link rel='stylesheet' href='css/09-sel-panel-brands-list.css'>
+  <link rel='stylesheet' href='css/10-items.css'>
+  <link rel='stylesheet' href='css/11-bottom-ads.css'>
+  <link rel='stylesheet' href='css/12-subscribe.css'>
+  <link rel='stylesheet' href='css/13-footer.css'>
+</head>
+<body>
+  <div class='layout'>
+<!-- User panel -->
+    <div class='userPanel'>
+      <div class='greeting'>
+        Hi! <a href='#'>Sign in</a> or <a href='#'>Register</a>
+      </div>
+      <a href='#' class='logInIcon'>
+        <img src='../Icon/user-small-red.png' />
+      </a>
+      <div class='featuredMenu'>
+        <a href='#'>Daily Deals</a>
+        <a href='#'>Sell</a>
+        <a href='#'>Help & Contact</a>
+      </div>
+      <a href='#' class='currencySelector'>
+        <img src='../Icon/gbr.png' />
+        <span>£ GBP</span>
+      </a>
+      <a href='#' class='cartIndicator'>
+        <span>6</span>
+        <img src='../Icon/icons-bag.png' />
+        <div><span>Your bag: </span>£3.99</div>
+      </a>
+    </div>
+<!-- Store Panel -->
+    <div class='storePanel'>
+      <div class='logo'>
+        SHOPMATE
+      </div>
+      <div class='storeMenu'>
+        <a href='#'>Women</a>
+        <a href='#'>Men</a>
+        <a href='#'>Kids</a>
+        <a href='#'>Shoes</a>
+        <a href='#'>Brands</a>
+      </div>
+      <a class='burger'>
+        <img src='../Icon/controls-burger-white.png' />
+      </a>
+      <div class='searchInput'>
+        <img src='../Icon/icons-close-small-white.png' class='closeSearchInput'>
+        <img src='../Icon/icons-search-white.png' class='searchIcon'>
+        <input placeholder='search anything' />
+      </div>
+      <a class='searchButton'>
+        <img src='../Icon/icons-search-white.png'>
+      </a>
+      <div class='cartBag2'>
+        <span>6</span>
+        <img src='../Icon/icons-bag-white.png' />
+      </div>
+    </div>
+    <!-- Top banner 'Mens Wear' -->
+    <div class='mainBanner'>
+      <div>
+        <h1>
+          Mens wear
+        </h1>
+        <div class='MensWearMenu'>
+          <ul>
+            <li>Accessories</li>
+            <li>ASOS Basic Tops</li>
+            <li>Bags</li>
+            <li>Caps & Hats</li>
+            <li>Gifts</li>
+            <li>Grooming</li>
+            <li>More mens wear...</li>
+          </ul>
+          <ul>
+            <li>Hoodies & Sweatshirts</li>
+            <li>Jackets & Coats</li>
+            <li>Jeans</li>
+            <li>Jewellery</li>
+            <li>Joggers</li>
+            <li>Jumpers & Cardigans</li>
+            <li>More mens wear...</li>
+          </ul>
+          <ul>
+            <li>Leather Jackets</li>
+            <li>Long Sleeve T-Shirts</li>
+            <li>Loungewear</li>
+            <li>Oversized & Longline</li>
+            <li>Polo Shirts</li>
+            <li>Shirts</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+<!-- Catalog -->
+    <div class='catalogGrid'>
+      <div class='selectorPanel'>
+        <div class='selectorDisplay'>
+          <h4>
+            Filter 486 items
+          </h4>
+          <a href='#'>
+            <img src='../Icon/icons-close-small-black.png' />
+            <span>Gender: <span>Woman</span></span>
+          </a>
+          <a href='#'>
+            <img src='../Icon/icons-close-small-black.png' />
+            <span>Category: <span>Dresses</span></span>
+          </a>
+        </div>
+<!-- Selector Panel WorkArea color/size/price/brands selectors -->
+        <div class='selectorPanelWorkArea'>
+<!-- Color picker -->
+          <div class='colorPicker'>
+            <h3>
+              Color
+            </h3>
+            <div class='colorPickerButtons'>
+              <div>
+                <input
+                type='checkbox'
+                name='Colors'
+                id='colorPickerCheckBoxBlue'
+                />
+                <label for='colorPickerCheckBoxBlue'>
+                  <div class='Blue'>
+                  </div>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Colors'
+                id='colorPickerCheckBoxIndigo'
+                />
+                <label for='colorPickerCheckBoxIndigo'>
+                  <div class='Indigo'>
+                  </div>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Colors'
+                id='colorPickerCheckBoxRed'
+                />
+                <label for='colorPickerCheckBoxRed'>
+                  <div class='Red'>
+                  </div>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Colors'
+                id='colorPickerCheckBoxOrange'
+                />
+                <label for='colorPickerCheckBoxOrange'>
+                  <div class='Orange'>
+                  </div>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Colors'
+                id='colorPickerCheckBoxYellow'
+                />
+                <label for='colorPickerCheckBoxYellow'>
+                  <div class='Yellow'>
+                  </div>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Colors'
+                id='colorPickerCheckBoxGreen'
+                />
+                <label for='colorPickerCheckBoxGreen'>
+                  <div class='Green'>
+                  </div>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Colors'
+                id='colorPickerCheckBoxPurple'
+                />
+                <label for='colorPickerCheckBoxPurple'>
+                  <div class='Purple'>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+<!-- Sizes selector -->
+          <div class='sizesSelector'>
+            <h3>
+              Size
+            </h3>
+            <div class='sizesSelectorButtons'>
+              <div>
+                <input
+                type='checkbox'
+                name='Sizes'
+                id='sizesSelectorCheckBoxXS'
+                />
+                <label for='sizesSelectorCheckBoxXS'>
+                  <div>XS</div>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                checked
+                name='Sizes'
+                id='sizesSelectorCheckBoxS'
+                />
+                <label for='sizesSelectorCheckBoxS'>
+                  <div>S</div>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Sizes'
+                id='sizesSelectorCheckBoxM'
+                />
+                <label for='sizesSelectorCheckBoxM'>
+                  <div>M</div>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Sizes'
+                id='sizesSelectorCheckBoxL'
+                />
+                <label for='sizesSelectorCheckBoxL'>
+                  <div>L</div>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Sizes'
+                id='sizesSelectorCheckBoxXL'
+                />
+                <label for='sizesSelectorCheckBoxXL'>
+                  <div>XL</div>
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Price range slider -->
+          <div class='priceSlider'>
+            <h3>Price range</h3>
+            <div>
+              <div class='BarUnderlayer'></div>
+              <div class='BarHighlight'></div>
+              <div class='DrugLeft'></div>
+              <div class='DrugRight'></div>
+            </div>
+            <div class='MinMaxPrices'>
+              <div class='MinPrice'>£4</div>
+              <div class='MaxPrice'>£28</div>
+            </div>
+          </div>
+<!-- Brands list selector -->
+          <div class='brandsSelector'>
+            <h3>Brand</h3>
+            <div>
+              <div>
+                <input
+                type='checkbox'
+                name='Brands'
+                id='BrandsAbercrombieFitch'
+                />
+                <label for='BrandsAbercrombieFitch'>
+                  <div></div>
+                  <span>
+                    Abercrombie & Fitch
+                  </span>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Brands'
+                id='BrandsAdidasOriginals'
+                />
+                <label for='BrandsAdidasOriginals'>
+                  <div></div>
+                  <span>
+                    Adidas Originals
+                  </span>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Brands'
+                id='BrandsASOS'
+                />
+                <label for='BrandsASOS'>
+                  <div></div>
+                  <span>
+                    ASOS
+                  </span>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Brands'
+                id='BrandsCheapMonday'
+                />
+                <label for='BrandsCheapMonday'>
+                  <div></div>
+                  <span>
+                    Cheap Monday
+                  </span>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Brands'
+                id='BrandsDiesel'
+                />
+                <label for='BrandsDiesel'>
+                  <div></div>
+                  <span>
+                    Diesel
+                  </span>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Brands'
+                id='BrandsEllesse'
+                />
+                <label for='BrandsEllesse'>
+                  <div></div>
+                  <span>
+                    Ellesse
+                  </span>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Brands'
+                id='BrandsFredPerry'
+                />
+                <label for='BrandsFredPerry'>
+                  <div></div>
+                  <span>
+                    Fred Perry
+                  </span>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Brands'
+                id='BrandsJackJones'
+                />
+                <label for='BrandsJackJones'>
+                  <div></div>
+                  <span>
+                    Jack & Jones
+                  </span>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Brands'
+                id='BrandsNewBalance'
+                />
+                <label for='BrandsNewBalance'>
+                  <div></div>
+                  <span>
+                    New Balance
+                  </span>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Brands'
+                id='BrandsNewLook'
+                />
+                <label for='BrandsNewLook'>
+                  <div></div>
+                  <span>
+                    New Look
+                  </span>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Brands'
+                id='BrandsNike'
+                />
+                <label for='BrandsNike'>
+                  <div></div>
+                  <span>
+                    Nike
+                  </span>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Brands'
+                id='BrandsPoloRalphLauren'
+                />
+                <label for='BrandsPoloRalphLauren'>
+                  <div></div>
+                  <span>
+                    Polo Ralph Lauren
+                  </span>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Brands'
+                id='BrandsReligion'
+                />
+                <label for='BrandsReligion'>
+                  <div></div>
+                  <span>
+                    Religion
+                  </span>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Brands'
+                id='BrandsRiverIsland'
+                />
+                <label for='BrandsRiverIsland'>
+                  <div></div>
+                  <span>
+                    River Island
+                  </span>
+                </label>
+              </div>
+              <div>
+                <input
+                type='checkbox'
+                name='Brands'
+                id='BrandsSelectedHomme'
+                />
+                <label for='BrandsSelectedHomme'>
+                  <div></div>
+                  <span>
+                    Selected Homme
+                  </span>
+                </label>
+              </div>
+              <div>
+                <input type='checkbox'
+                name='Brands'
+                id='BrandsVans'
+                />
+                <label for='BrandsVans'>
+                  <div></div>
+                  <span>
+                    Vans
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+<!-- Apply selected -->
+        <div class='SubscribeArea'>
+          <button>
+            Apply
+          </button>
+          <div>
+            <img src='../Icon/icons-close-small-red.png' />
+            <div>
+              Clear All
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- Catalog items | first part-->
+      <div class='catalogItem'>
+        <div class='ItemBuyNow'>
+          <div class='standartItemView'>
+            <img src='../Images/images-shirt5.png' />
+            <div class='itemDetails'>
+              <h3>
+                Men's Knitwear Offers
+              </h3>
+              <button>
+                Buy now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='catalogItem'>
+        <div class='itemOnHover'>
+          <div>
+            <img src='../Icon/icons-heart-red.png' />
+          </div>
+          <button>
+            Quick View
+          </button>
+        </div>
+        <div class='itemColorPicker'>
+          <input
+            type='radio'
+            value='Blue'
+            name='MenCasualLizardColor'
+            id='MenCasualLizardBlue'
+          />
+          <label for='MenCasualLizardBlue'><div class='Blue'></div></label>
+          <input
+            type='radio'
+            value='Indigo'
+            name='MenCasualLizardColor'
+            id='MenCasualLizardIndigo'
+          />
+          <label for='MenCasualLizardIndigo'><div class='Indigo'></div></label>
+          <input
+            type='radio'
+            value='Red'
+            name='MenCasualLizardColor'
+            id='MenCasualLizardRed'
+          />
+          <label for='MenCasualLizardRed'><div class='Red'></div></label>
+        </div>
+        <div class='itemQuickView'>
+          <div class='standartItemView'>
+            <img src='../Images/images-shirt6.png' />
+            <div class='itemDetails'>
+              <h3>
+                Men Casual Lizard
+              </h3>
+              <div class='itemPrice'>
+                £14.99
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='catalogItem'>
+        <div class='itemQuickView'>
+          <div class='centeredPreviewItemView'>
+            <h3>
+              Men's Shirts Offers
+            </h3>
+            <img src='../Images/images-shirt7.png' />
+            <div class='itemPriceBold'>
+              From £4.99
+            </div>
+          </div>
+        </div>
+        <div class='itemOnHover'>
+          <div>
+            <img src='../Icon/icons-heart-red.png' />
+          </div>
+          <button>
+            Quick View
+          </button>
+        </div>
+      </div>
+      <div class='catalogItem'>
+        <div class='hotItemLabel'>
+          HOT
+        </div>
+        <div class='itemQuickView'>
+          <div class='standartItemView'>
+            <img src='../Images/images-shirt8.png' />
+            <div class='itemDetails'>
+              <h3>
+                New Look T-Shirt In Gradient Fade
+              </h3>
+              <div class='itemPriceBold'>
+                £14.99
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='itemOnHover'>
+          <div>
+            <img src='../Icon/icons-heart-red.png' />
+          </div>
+          <button>
+            Quick View
+          </button>
+        </div>
+      </div>
+      <div class='catalogItem'>
+        <div class='ItemBuyNow'>
+          <div class='standartItemView'>
+            <img src='../Images/images-shirt9.png' />
+            <div class='itemDetails'>
+              <h3>
+                Novelty T-shirts
+              </h3>
+              <button>
+                Buy now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='catalogItem'>
+        <div class='itemColorPicker'>
+          <input
+            type='radio'
+            value='Blue'
+            name='VariousTshortsColor'
+            id='VariousTshortsBlue'
+          />
+          <label for='VariousTshortsBlue'><div class='Blue'></div></label>
+          <input
+            type='radio'
+            value='Indigo'
+            name='VariousTshortsColor'
+            id='VariousTshortsIndigo'
+          />
+          <label for='VariousTshortsIndigo'><div class='Indigo'></div></label>
+          <input
+            type='radio'
+            value='Red'
+            name='VariousTshortsColor'
+            id='VariousTshortsRed'/>
+          <label for='VariousTshortsRed'><div class='Red'></div></label>
+        </div>
+        <div class='itemQuickView'>
+          <div class='standartItemView'>
+            <img src='../Images/images-shirt10.png' />
+            <div class='itemDetails'>
+              <h3>
+                Various T-shorts
+              </h3>
+              <div class='itemPrice'>
+                £14.99
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='itemOnHover'>
+          <div>
+            <img src='../Icon/icons-heart-red.png' />
+          </div>
+          <button>
+            Quick View
+          </button>
+        </div>
+      </div>
+
+      <div class='catalogItem'>
+        <div class='hotItemLabel'>
+          HOT
+        </div>
+        <div class='itemQuickView'>
+          <div class='standartItemView'>
+            <img src='../Images/images-shirt13.png' />
+            <div class='itemDetails'>
+              <h3>
+                Pull&Bear Jumper In<br />Textured Knit In Blue
+              </h3>
+              <div class='itemPriceBold'>
+                £14.99
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='itemOnHover'>
+          <div>
+            <img src='../Icon/icons-heart-red.png' />
+          </div>
+          <button>
+            Quick View
+          </button>
+        </div>
+      </div>
+      <div class='catalogItem'>
+        <div class='itemQuickView'>
+          <div class='standartItemView'>
+            <img src='../Images/images-shirt12.png' />
+            <div class='itemDetails'>
+              <h3>
+                Harajuku T-shirt
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class='itemOnHoverConstructor'>
+          <h3>
+            Harajuku T-shirt
+          </h3>
+          <div class='itemPriceBig'>
+            £14.99
+          </div>
+          <div class='itemColorPickerHover'>
+            <input
+              type='radio'
+              value='Blue'
+              name='HarajukuTshirtColor'
+              id='HarajukuTshirtBlue'
+            />
+            <label for='HarajukuTshirtBlue'>
+              <div class='Blue'></div>
+            </label>
+            <input type='radio'
+              value='Indigo'
+              name='HarajukuTshirtColor'
+              id='HarajukuTshirtIndigo'/>
+            <label for='HarajukuTshirtIndigo'>
+              <div class='Indigo'></div>
+            </label>
+            <input
+              type='radio'
+              value='Red'
+              name='HarajukuTshirtColor'
+              id='HarajukuTshirtRed'
+            />
+            <label for='HarajukuTshirtRed'>
+              <div class='Red'></div>
+            </label>
+          </div>
+          <div class='ButtonColumns'>
+            <div class='SizeSelector'>
+              <div>
+                Size
+              </div>
+              <img src='../Icon/icons-chevron-down.png' />
+            </div>
+            <button>
+              Buy now
+            </button>
+          </div>
+          <div class='addToWishListButton'>
+            <img src='../Icon/icons-heart-red.png' />
+            <div>
+              Add to wish list
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='catalogItem'>
+        <div class='itemColorPicker'>
+          <input
+            type='radio'
+            value='Blue'
+            name='MenCasualLizard2Color'
+            id='MenCasualLizard2Blue'
+          />
+          <label for='MenCasualLizard2Blue'><div class='Blue'></div></label>
+          <input
+            type='radio'
+            value='Indigo'
+            name='MenCasualLizard2Color'
+            id='MenCasualLizard2Indigo'
+          />
+          <label for='MenCasualLizard2Indigo'><div class='Indigo'></div></label>
+          <input
+            type='radio'
+            value='Red'
+            name='MenCasualLizard2Color'
+            id='MenCasualLizard2Red'
+          />
+          <label for='MenCasualLizard2Red'><div class='Red'></div></label>
+        </div>
+        <div class='itemQuickView'>
+          <div class='standartItemView'>
+            <img src='../Images/images-shirt11.png' />
+            <div class='itemDetails'>
+              <h3>
+                Men Casual Lizard
+              </h3>
+              <div class='itemPrice'>
+                £14.99
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='itemOnHover'>
+          <div>
+            <img src='../Icon/icons-heart-red.png' />
+          </div>
+          <button>
+            Quick View
+          </button>
+        </div>
+      </div>
+    </div>
+<!-- Bottom ADS (Converse)  -->
+    <div class='bottomAds'>
+      <div>
+        <h2>Converse</h2>
+        <div>
+          Explore styles tough enough to handle all your workouts
+        </div>
+        <button>Shop Brand</button>
+      </div>
+    </div>
+<!-- Newsletter SUBSCRIBE pane  -->
+    <div class='subscribePane'>
+      <div class='subscribeInvitationText'>
+        SUBSCRIBE FOR SHOP NEWS, UPDATES AND SPECIAL OFFERS
+      </div>
+      <div class='subscribeInput'>
+        <img src='../Icon/icons-email-black.png' />
+        <input placeholder='Your e-mail here' />
+      </div>
+      <button class='subscribePaneSubscribeButton'>
+        Subscribe
+      </button>
+    </div>
+<!-- Footer -->
+    <div class='footer'>
+      <div class='footerMenu'>
+        <a>Women</a>
+        <a>Men</a>
+        <a>Kids</a>
+        <a>Shoes</a>
+        <a>Brands</a>
+      </div>
+      <div class='footerSocialLinks'>
+        <a href='#'>
+          <img src='../Icon/icons-instagram-black.png' />
+        </a>
+        <a href='#'>
+          <img src='../Icon/icons-pinterest-black.png' />
+        </a>
+        <a href='#'>
+          <img src='../Icon/icons-twitter-black.png' />
+        </a>
+        <a href='#'>
+          <img src='../Icon/icons-facebook-black.png' />
+        </a>
+      </div>
+      <div class='footerCopyrights'>
+        ©2016 shopmate Ltd  <span>•</span>  Contact <span>•</span> Privacy policy
+      </div>
+    </div>
+  </div>
+</div>
+<!-- (pixel perfect works on >1000px width) -->
+
+<div class='pixelPerfect'></div>
+
+</body>
+
+</html>
