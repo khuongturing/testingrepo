@@ -1,79 +1,109 @@
-# eCommerce REST API
+# Turing E-Commerce API
 
-[![Build Status](https://travis-ci.com/gboyegadada/ecommerce-api.svg?token=kWsW2pqG86CpBXZyuBHc&branch=master)](https://travis-ci.com/gboyegadada/ecommerce-api)
+[![codecov](https://codecov.io/gh/terisolve/turing-api/branch/master/graph/badge.svg?token=ZFqUkBI4VD)](https://codecov.io/gh/terisolve/turing-api)
+[![Build Status](https://travis-ci.com/terisolve/turing-api.svg?token=ozaWQTUqMvyqxXhsDedC&branch=master)](https://travis-ci.com/terisolve/turing-api)
 
-A REST API based on NodeJS, Express, MySQL, and Knex using JSON Web Tokens (JWT) for authentication.
+## Overview
+Turing E-commerce is an ecommerce application that lets users shop for clothings and wears of asorted brands types. They allow shipping to many parts of the world. 
 
-# Quick Start
+The development of this API took into account the several specific needs of the product. It is carefully crafted as one that can easily require updates and new features, taking into account the need for scalability, easy maintainance, performance and security.
 
-1. Clone the repo and navigate to project root 
+## Project Architecture
+I have chosen to use a `Domain-Driven Architecture` that organises the codebase as a collection of features. 
 
-2. Copy `.env.example` to `.env`
+### A top-level directory structure 
 
-3. Then run:
-    ```bash
-    $ docker-compose up -d
-    ```
+    server
+    ├── api       
+    │   └──router.js
+    ├── config
+    │   ├── constants           # load all project-wide constants including environment variables
+    │   ├── database            # database configuration
+    │   └── redis   
+    ├── database
+    │   ├── migration           # migration dump and script
+    │   └── seeding             # seed dump and script
+    ├── domains
+    │   ├── attribute      
+    │   ├── audit               
+    │   ├── order               
+    │   │   product 
+    │   │   ├── __tests__
+    │   │   ├── model.js        # models the table schema and provides data access methods
+    │   │   ├── controller.js   # handles the http request and returns the response
+    │   │   ├── repository.js   # fetches data from cache or database through the Model
+    │   │   ├── router.js       # contain all routes for a domain
+    │   │   └── transformer.js  # transformers the response                               
+    │   └── ...                                     
+    ├── http
+    │   ├── middlewares         # all middlewares
+    │   ├── httpException       # handler for http exceptions
+    │   ├── response            # response handler
+    │   └── wrapAsync           # wrapper for all async functions
+    ├── public                  # serve static files used in the swagger documentation
+    ├── services                # contains all external services used e.g payment, facebook, network request
+    ├── utils                   # some utilities used within the project
+    └── README.md
 
-## URLs
-- API: 
-    ```bash
-    http://localhost:49160
-    ```
-- Docs: 
-    ```bash
-    http://localhost:49160/docs
-    ```
-- MySQL: 
-    ```bash
-    $ mysql -u root -h localhost -Dapp -P 33062
-    ```
 
 
 
 
-# Project structure
+#### The Benefit of the Architecture
+- Better maintainability
+- Quicker to scale the architecture into a Micro-Services architecture
+- Faster development made possible by the clean structure
+
+I also added another piece to the data access layer - **Repository**
+
+The concept of a **Repository** is that it handles fetching and returning data to the controller. It knows to fetch the data either from the cache or from the database.
 
 
-## Architecture
+## Utilities Developed
+I have produced a couple of utilities that serve different purposes.
 
-This is an API first monolith app that uses a typical MVC flow. To improve performance I chose not use an ORM for the models but to use a query builder instead. Models are in `/repositories`, while Controllers are in `/controllers`. There are no views as they do not really apply here.
+* Pagination
+  > This contains the methods for extracting the pagination properties sent from the request - `orderBy, limit, page` and turning them into properties that are passed to the query that is executed to retrieve paginated data and meta
 
-![](./dist/readme/express-rest-api.jpg)
+* errorHandler
+  > This intercepts and handles all the errors that occur throughout the flow of the application.
 
-## Technologies 
+* baseRepository
+  > The base Repository has methods for fetching a collection of resource records or a single item. It is also responsible for caching the response data that should be sent back to the controllers. It reach for the cache first and then to the database through the Model.
 
-### Server 
-- NodeJS + Express JS
-- PM2 for process management and clusters
-- MySQL with Knex query builder for database
-- Redis for caching and for rate limiter middleware
-- `compression` node library for gzip compression
-- `helmet` node library for header security
+* facebookLogin
+  > This is used for the facebook login. It uses facebook graph API to fetch data that allows the application to validate a facebook user account so that they can be given access to our services.
 
-### Development
-- Docker containers (app, redis and mysql) with Docker Compose
-- Travis CI for integrated tests on pull requests
-- Snyk for npm package vulnerability scans
-- Mocha with Istanbul for testing and test coverage reporting
-- Bash scripts for docker compose hooks (e.g. waiting for MySQL container before running the server)
+<br />
 
-# Adnvanced Requirements
-This is my first Node JS backend project (I use PHP with Symfony at work). Also it is hard to clearify what the "current" system can support without knowing it's architecture, technologies used and available resources but I tried to do a little research:
+## Third Party Tools
+* Joi 
+  > All Input sent through the API are validated with joi. Schemas are provided for each endpoint requiring input validation. The defined schema is checked against the supplied fields. The fields failing the validations are reported using the error handler middleware.
 
-1. **The current system can support 100,000 daily active users. How do you design a new system to support 1,000,000 daily active users?**
-    - Node JS is considered to be generally fast and efficient (which is why I chose it even though I have more experience with PHP)
-    - Avoid ORMs if possible because complex ORM calls can be Inefficient
-    - On database side, separating the objects (e.g. products) into a few different collections: all, most liked, newest, newest in stock and so forth. Whenever an item gets added, liked or ordered, the code checks if it (still) belongs to one of those collections and acts accordingly. This way the code can query from prepared collections instead of running complicated queries on one huge pile.
-    - Upload images to cloud storage like Google or AWS S3
-    - Use caching with Redis or in-memory
-    - Don’t use synchronous functions
-    - Implement gzip compression at a reverse proxy level
-    - Do not use `console.log()` or `console.error()` in production because they are synchronous functions (use a logging library like Winston or Bunyan)
-    - Running the app in a cluster and using a load balancer
-    - Use a process manager like PM2 or StrongLoop
+* Sequelize ORM
+  > Sequelize is one of the most popular Database ORM (Object Relationtional Mapper). It's API is simple and expressive. It provides an abstraction on the Data Access Layer. Sequelize works very well with most SQL-based RDBMS.
 
-2. **A half of the daily active users comes from United States. How do you design a new system to handle this case?**
-    
-    - I have no experience deploying an app with this kind of request volume but I would say maybe dedicate a larger cluster (with auto-scaling) to that region (in AWS for example) and a smaller cluster to less demanding regions.
+* Redis
+  > Caching is implemented in redis. Once new data is created or existing data updated, the cache is cleared removing keys matching the affected domain.
 
+* Winston
+  > This is used for logging errors in the command line, useful during development.
+
+* Payment
+  > Stripe is used to receive payments made for orders
+
+<br />
+
+## API FLOW
+The Flow of actions across the API can best be described with this diagram
+<br />
+<br />
+
+![image](https://user-images.githubusercontent.com/51211828/59460119-3b7d4180-8e16-11e9-8b5a-03e687d9780c.png)
+
+## SECURITY
+The API is protected with JWT (JSON WEB TOKEN). This allows the application to identify authorized users and restrict access to data for unauthorised users.
+
+Passwords have also been hashed with strong a crypto-algorithm.
+
+**A structure has been established for the implementation of rate-limiting**, to circumvent **DOS** security vulnerabilities with the system.
