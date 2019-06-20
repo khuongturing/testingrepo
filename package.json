@@ -1,85 +1,78 @@
 {
-  "name": "turing-api",
+  "name": "shopmate-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "engines": {
-    "node": "8.11.4"
+  "main": "server/index.js",
+  "watch": {
+    "eslint": "server/**/*.js"
   },
-  "private": true,
   "scripts": {
-    "start": "node_modules/.bin/babel-node server --preset-env",
-    "start:dev": "nodemon --exec babel-node server --preset-env",
-    "migrate": "node_modules/.bin/babel-node server/database/migration/migrate",
-    "seed": "node_modules/.bin/babel-node server/database/seeding/seed",
-    "test": "cross-env NODE_ENV=test npm run db:setup && PORT=9000 nyc mocha --timeout 20000 --exit **/__tests__/*.spec.js",
-    "db:setup": "npm run migrate && npm run seed",
-    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
-    "heroku-postbuild": "npm run db:setup"
-  },
-  "nyc": {
-    "require": [
-      "@babel/register",
-      "@babel/polyfill"
-    ],
-    "reporter": [
-      "text",
-      "html",
-      "lcov"
-    ],
-    "exclude": [
-      "server/database"
-    ]
+    "babel-node": "babel-node --presets=env",
+    "babel-watch": "babel-watch server/index.js",
+    "dev": "cross-env process.env.NODE_ENV=development npm run eslint && npm run babel-node server/index.js",
+    "eslint": "eslint . --fix --ignore-path .gitignore",
+    "migrate-undo": "sequelize db:migrate:undo",
+    "migrate-undo:all": "sequelize db:migrate:undo:all",
+    "migrate": "sequelize db:migrate",
+    "migrate-reset": "cross-env process.env.NODE_ENV=test sequelize db:migrate:undo:all && sequelize db:migrate",
+    "postinstall": "babel server -d build",
+    "pretest": "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test",
+    "seed": "cross-env process.env.NODE_ENV=test sequelize db:seed:all",
+    "start": "npm run migrate && node build/index.js",
+    "test": "cross-env process.env.NODE_ENV=test  nyc mocha --compilers js:babel-core/register ./server/tests/**/'*.test.js' --recursive --exit || true",
+    "watch": "npm-watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/terisolve/turing-api.git"
+    "url": "git+https://github.com/kampkelly/shopmate-backend.git"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/terisolve/turing-api/issues"
-  },
-  "homepage": "https://github.com/terisolve/turing-api#readme",
-  "devDependencies": {
-    "@babel/cli": "7.4.4",
-    "@babel/core": "7.4.5",
-    "@babel/node": "7.4.5",
-    "@babel/polyfill": "7.4.4",
-    "@babel/preset-env": "7.4.5",
-    "babel-plugin-module-resolver": "^3.2.0",
-    "chai": "4.2.0",
-    "codecov": "^3.5.0",
-    "cross-env": "5.2.0",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.17.3",
-    "mocha": "6.1.4",
-    "nyc": "14.1.1",
-    "supertest": "4.0.2"
-  },
+  "author": "Runor",
+  "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.0",
-    "bcryptjs": "^2.4.3",
-    "bluebird": "^3.5.5",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.0.0",
-    "express": "4.17.1",
+    "@sendgrid/mail": "^6.3.1",
+    "async-redis": "^1.1.7",
+    "babel-polyfill": "^6.26.0",
+    "bcrypt": "^3.0.1",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "cross-env": "^5.2.0",
+    "dotenv": "^6.0.0",
+    "errorhandler": "^1.5.0",
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "express": "^4.16.3",
+    "express-jwt": "^5.3.1",
+    "express-session": "^1.15.6",
     "faker": "^4.1.0",
-    "joi": "^14.3.1",
+    "helmet": "^3.16.0",
     "jsonwebtoken": "^8.5.1",
-    "md5": "^2.2.1",
-    "morgan": "1.9.1",
-    "mysql-import": "2.0.2",
-    "mysql2": "1.6.5",
-    "newrelic": "^5.9.1",
+    "morgan": "^1.9.1",
+    "mysql2": "^1.6.5",
+    "nodemailer": "^6.1.1",
+    "npm-watch": "^0.4.0",
     "passport": "^0.4.0",
     "passport-facebook": "^3.0.0",
-    "redis": "^2.8.0",
-    "sequelize": "5.8.7",
-    "stripe": "^7.1.0",
-    "swagger-ui-express": "^4.0.6",
-    "winston": "3.2.1"
-  }
+    "request": "^2.87.0",
+    "sequelize": "^5.8.2",
+    "sequelize-cli": "^5.4.0",
+    "stripe": "^6.30.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-airbnb": "^2.5.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "babel-watch": "^2.0.7",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.7",
+    "nyc": "^13.0.1"
+  },
+  "bugs": {
+    "url": "https://github.com/kampkelly/shopmate-backend/issues"
+  },
+  "homepage": "https://github.com/kampkelly/shopmate-backend#readme"
 }

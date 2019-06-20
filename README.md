@@ -1,109 +1,557 @@
-# Turing E-Commerce API
+[![Build Status](https://travis-ci.com/kampkelly/shopmate-backend.svg?token=jDmhdZzRzB1WyMWuvoJF&branch=develop)](https://travis-ci.com/kampkelly/shopmate-backend)
 
-[![codecov](https://codecov.io/gh/terisolve/turing-api/branch/master/graph/badge.svg?token=ZFqUkBI4VD)](https://codecov.io/gh/terisolve/turing-api)
-[![Build Status](https://travis-ci.com/terisolve/turing-api.svg?token=ozaWQTUqMvyqxXhsDedC&branch=master)](https://travis-ci.com/terisolve/turing-api)
+# shopmate-backend
 
-## Overview
-Turing E-commerce is an ecommerce application that lets users shop for clothings and wears of asorted brands types. They allow shipping to many parts of the world. 
+This is the API for an e-commerce application allowing users to create accounts, view products, add to cart and checkout.
 
-The development of this API took into account the several specific needs of the product. It is carefully crafted as one that can easily require updates and new features, taking into account the need for scalability, easy maintainance, performance and security.
+The following are the API routes available
 
-## Project Architecture
-I have chosen to use a `Domain-Driven Architecture` that organises the codebase as a collection of features. 
+### Setup and Installation
 
-### A top-level directory structure 
+The app is built with the following tools/technologies:
 
-    server
-    ├── api       
-    │   └──router.js
-    ├── config
-    │   ├── constants           # load all project-wide constants including environment variables
-    │   ├── database            # database configuration
-    │   └── redis   
-    ├── database
-    │   ├── migration           # migration dump and script
-    │   └── seeding             # seed dump and script
-    ├── domains
-    │   ├── attribute      
-    │   ├── audit               
-    │   ├── order               
-    │   │   product 
-    │   │   ├── __tests__
-    │   │   ├── model.js        # models the table schema and provides data access methods
-    │   │   ├── controller.js   # handles the http request and returns the response
-    │   │   ├── repository.js   # fetches data from cache or database through the Model
-    │   │   ├── router.js       # contain all routes for a domain
-    │   │   └── transformer.js  # transformers the response                               
-    │   └── ...                                     
-    ├── http
-    │   ├── middlewares         # all middlewares
-    │   ├── httpException       # handler for http exceptions
-    │   ├── response            # response handler
-    │   └── wrapAsync           # wrapper for all async functions
-    ├── public                  # serve static files used in the swagger documentation
-    ├── services                # contains all external services used e.g payment, facebook, network request
-    ├── utils                   # some utilities used within the project
-    └── README.md
+1. NodeJs
+2. Mysql
+3. Sequelize ORM
+4. Redis
+
+## Installation
+
+1. Install Nodejs and npm if they are not already installed.
+2. Install Mysql server on database. If using a mac, you can make use of SequelPro to connect to it. If on Windows, ypu can make use of PhpMyAdmin.
+3. Clone the repository.
+4. Run `npm install`.
+5. Create a .env file in your root directory and add the environment variables from .env-sample (put in your own details).
+6. Migrate the database with `npm run migrate`.
+7. You can seed the database with `npm run seed` (optionally).
+8. Run `npm run dev to start the server`.
+9. Visit the available endpoints.
+
+##### _The hosted app can be accessed [here](https://shopmate-backend-api.herokuapp.com/)_
+
+##### _The documentation for this api can be found [here](https://documenter.getpostman.com/view/7132396/S1LsYVz3)_
+
+## Available Endpoints
+
+### Customer Registration
+
+Post Request to: `/customers`
+
+Body:
+```
+{
+	"name": "customer name",
+	"email": "email@example.com",
+	"password": "password"
+}
+```
+Example response: 
+```
+{
+    "customer": {
+        "customer_id": 'id',
+        ...
+    },
+    "accessToken": "...",
+    "expires_in": "24h"
+}
+```
+
+### Customer Login
+
+Post Request to: `/customers/login`
+
+Body:
+```
+{
+	"email": "email@example.com",
+	"password": "password"
+}
+```
+Example response: 
+```
+{
+    "customer": {
+        "customer_id": 'id',
+        ...
+    },
+    "accessToken": "...",
+    "expires_in": "24h"
+}
+```
+
+### Customer update address 
+
+Post request to: `/customers/address`
+
+*Jwt token required in header Authorization*
+
+Body:
+```
+{
+	"address_1": "...",
+	"address_2": "...",
+	"city": "...",
+	"region": "...",
+	"postal_code": "...",
+	"country": "...",
+	"shipping_region_id": 'id'
+}
+```
+Example response: 
+```
+{
+    "customer_id": 'id',
+    "name": "...",
+    "email": "...",
+    "address_1": "...",
+    "address_2": "...",
+    "city": "...",
+    "region": "...",
+    "postal_code": "...",
+    "country": "...",
+    "shipping_region_id": 'id',
+    "credit_Card": null,
+    "day_phone": null,
+    "eve_phone": null,
+    "mob_phone": null
+}
+```
+
+### Product Endpoints
+
+#### Get all products
+
+*Get request to: `/products`*
+
+#### Get all products (with filters)
+
+*Get request to: `/products?limit=10&description_length=51&page=1`*
+
+Example response: 
+```
+{
+    "count": 0,
+    "rows": [...]
+}
+
+```
+
+#### Get single product
+
+*Get request to: `/products/:productId`*
+
+Example response: 
+```
+{
+    "product_id": 'id',
+    "name": "...",
+    "description": "...",
+    "price": "...",
+    "discounted_price": "...",
+    "image": "...",
+    "image_2": "...",
+    "thumbnail": "...",
+    "display": 0
+}
+
+```
+
+#### Get products in category
+
+*Get request to: `/products/inCategory/:categoryId`*
+
+#### Get products in category (with filters)
+
+*Get request to: `/products/inCategory/:categoryId?page=3&limit=23&description_length=51`*
 
 
+Example response: 
+```
+{
+    "count": 0,
+    "rows": []
+}
+
+```
+
+#### Get products in department
+
+*Get request to: `/products/inDepartment/:departmentId`*
+
+#### Get products in department (with filters)
+
+*Get request to: `/products/inDepartment/:departmentId?page=3&limit=23&description_length=51`*
 
 
+Example response: 
+```
+{
+    "count": 0,
+    "rows": []
+}
 
-#### The Benefit of the Architecture
-- Better maintainability
-- Quicker to scale the architecture into a Micro-Services architecture
-- Faster development made possible by the clean structure
+```
 
-I also added another piece to the data access layer - **Repository**
+#### Search products
 
-The concept of a **Repository** is that it handles fetching and returning data to the controller. It knows to fetch the data either from the cache or from the database.
+*Get request to: `/products/search?query_string=Coay&page=1&limit=10&description_length=50`*
 
+Example response: 
+```
+{
+    "count": 0,
+    "rows": [...]
+}
 
-## Utilities Developed
-I have produced a couple of utilities that serve different purposes.
+```
 
-* Pagination
-  > This contains the methods for extracting the pagination properties sent from the request - `orderBy, limit, page` and turning them into properties that are passed to the query that is executed to retrieve paginated data and meta
+### Shopping Cart Endpoints
 
-* errorHandler
-  > This intercepts and handles all the errors that occur throughout the flow of the application.
+#### Generate cart id
 
-* baseRepository
-  > The base Repository has methods for fetching a collection of resource records or a single item. It is also responsible for caching the response data that should be sent back to the controllers. It reach for the cache first and then to the database through the Model.
+*Get request to: `shoppingcart/generateUniqueId`*
 
-* facebookLogin
-  > This is used for the facebook login. It uses facebook graph API to fetch data that allows the application to validate a facebook user account so that they can be given access to our services.
+Example response: 
+```
+{
+    "cart_id": "..."
+}
+```
 
-<br />
+#### Add product to cart
 
-## Third Party Tools
-* Joi 
-  > All Input sent through the API are validated with joi. Schemas are provided for each endpoint requiring input validation. The defined schema is checked against the supplied fields. The fields failing the validations are reported using the error handler middleware.
+*Post request to: `shoppingcart/add`*
+Body:
+```
+{
+	"cart_id": 'id',
+	"product_id": 1',
+	"attributes": "..."
+}
+```
 
-* Sequelize ORM
-  > Sequelize is one of the most popular Database ORM (Object Relationtional Mapper). It's API is simple and expressive. It provides an abstraction on the Data Access Layer. Sequelize works very well with most SQL-based RDBMS.
+Example response: 
+```
+[
+    {
+        "item_id": 'id',
+        "name": "...",
+        "attributes": "...",
+        "price": "...",
+        "quantity": 2,
+        "subtotal": "..."
+    }
+    ...
+]
+```
 
-* Redis
-  > Caching is implemented in redis. Once new data is created or existing data updated, the cache is cleared removing keys matching the affected domain.
+#### Get items in a shopping cart
 
-* Winston
-  > This is used for logging errors in the command line, useful during development.
+*Get request to: `shoppingcart/:cart_id`*
 
-* Payment
-  > Stripe is used to receive payments made for orders
+Example response: 
+```
+[
+    {
+        "item_id": 'id',
+        "name": "...",
+        "attributes": "...",
+        "price": "...",
+        "quantity": 2,
+        "subtotal": "..."
+    }
+    ...
+]
+```
 
-<br />
+#### Empty the shopping cart
 
-## API FLOW
-The Flow of actions across the API can best be described with this diagram
-<br />
-<br />
+*Get request to: `shoppingcart/empty/:cart_id`*
 
-![image](https://user-images.githubusercontent.com/51211828/59460119-3b7d4180-8e16-11e9-8b5a-03e687d9780c.png)
+Example response: 
+```
+[]
+```
 
-## SECURITY
-The API is protected with JWT (JSON WEB TOKEN). This allows the application to identify authorized users and restrict access to data for unauthorised users.
+### Stripe Endpoints
 
-Passwords have also been hashed with strong a crypto-algorithm.
+#### Charge on Stripe
 
-**A structure has been established for the implementation of rate-limiting**, to circumvent **DOS** security vulnerabilities with the system.
+*Get request to: `stripe/charge`*
+Body:
+```
+{
+	"stripeEmail": "email@exmaple.com",
+    "amount": 100,
+    "order_id": 1,
+    "description": "...",
+    "currency": "usd",
+    "stripeToken": "..."
+}
+```
+
+Example response: 
+```
+{
+     ...
+}
+```
+
+## Additional Endpoints
+
+### Create an order
+
+N.B: Authentication is required
+
+*Post request to: `orders`*
+Body:
+```
+{
+        "cart_id": "tyy4amqpi3axkimrci",
+	"shipping_id": "3",
+	"tax_id": 2
+}
+```
+
+Example response: 
+```
+{
+     orderId: 'id
+}
+```
+
+### Get orders by a customer
+
+N.B: Authentication is required
+
+*Get request to: `orders/inCustomer`*
+
+Example response: 
+```
+[
+    {
+        "order_id": 'id,
+        "total_amount": "...",
+        "created_on": "...",
+        "shipped_on": null,
+        "status": 0,
+        "name": "..."
+    }
+]
+```
+
+### Get order info
+
+N.B: Authentication is required
+
+*Get request to: `orders/:order_id`*
+
+Example response: 
+```
+[
+    {
+        "order_id": 'id,
+        "product_id": 2,
+        "attributes": "...",
+        "product_name": "...",
+        "quantity": 1,
+        "unit_cost": "...",
+        "subtotal": "..."
+    },
+    ...
+]
+```
+
+### Stripe webhook
+
+*Get request to: `stripe/webhooks`*
+
+Example response: 
+```
+{
+    "received": true
+}
+```
+
+### Get a stripe token
+
+N.B: Authentication is required
+
+*Get request to: `stripe/getToken`*
+
+Example response: 
+```
+{
+    "stripeToken": "..."
+}
+```
+
+### Get shipping regions
+
+*Get request to: `shipping/regions`*
+
+Example response: 
+```
+[
+    {
+        "shipping_region_id": 'id',
+        "shipping_region": "..."
+    },
+    ...
+]
+```
+
+### Get shipping for a shipping region
+
+*Get request to: `shipping/regions/:shipping_region_id`*
+
+Example response: 
+```
+[
+    {
+        "shipping_id": 'id',
+        "shipping_type": "...",
+        "shipping_cost": "...",
+        "shipping_region_id": 'id'
+    },
+    ...
+]
+```
+
+### Get all categories
+
+*Get request to: `/categories`*
+
+#### Get categories (with filters)
+
+*Get request to: `/categories/?page=3&limit=23&description_length=51`*
+
+Example response: 
+```
+{
+    "count": 7,
+    "rows": [
+        {
+            "category_id": id,
+            "department_id": id,
+            "name": "...",
+            "description": "..."
+        },
+        ...
+     ]
+}
+```
+
+### Get a single category
+
+*Get request to: `/categories/:category_id`*
+
+Example response: 
+```
+{
+    "category_id": id,
+    "name": "...",
+    "description": "...",
+    "department_id": id
+}
+```
+
+### Get the category of a product
+
+*Get request to: `/categories/inProduct/:product_id`*
+
+Example response: 
+```
+[
+    {
+        "category_id": id,
+        "department_id": id,
+        "name": "..."
+    }
+]
+```
+
+### Get all departments
+
+*Get request to: `/departments`*
+
+Example response: 
+```
+[
+        {
+            "department_id": id,
+            "name": "...",
+            "description": "..."
+        },
+        ...
+]
+```
+
+### Get a single department
+
+*Get request to: `/departments/:department_id`*
+
+Example response: 
+```
+{
+    "department_id": id,
+    "name": "...",
+    "description": "..."
+}
+```
+
+### Get the categories of a department
+
+*Get request to: `/categories/inDepartment/:department_id`*
+
+Example response: 
+```
+[
+    {
+        "category_id": id,
+        "name",
+        "description",
+        "department_id": id
+    }
+]
+```
+
+## Testing
+
+To run the tests, run `npm run test` in the terminal.
+
+## Supporting a large number of users
+
+#### If you have a large number of users, here are a couple of suggestions:
+
+1. Rent a server (a cloud server, AWS or Google) with great specifications. This includes the ram, storage size and how distributed it is. It should also be very reliable (99%+ uptime). 
+2. Make use of caching to reduce the number of requests to the database.
+3. Save images and assets in a cloud storage such as Google to reduce the stress on the server. This also allows the server to have more storage space.
+
+#### When most of your users are coming from a specific region(US):
+
+You would need to ensure majority of your severs are from that region(US) and regions around it. This will allow users from the US to send and retrieve data faster because their request location will be closer.
+Also, you can make use of load balancers to efficiently distribute incoming network traffic. So, if the servers from the US region are receiving very large number of requests and a server goes down, the load balancer will  redirect traffic to the remaining online servers from other regions.
+
+## System Design Architecture:
+
+The system architecture used for this application is the MVC project with Object Oriented Programming. This stands for Models, Views and Controllers. The model handles all database connections while controllers are responsible for the logic of the application.
+
+Several data structures were used in the application including strings, arrays, objects, etc.
+
+The stack used in building this project includes:
+- Nodejs
+- Express
+- Sequelize
+- MySQL
+- Redis
+
+You can view the system diagram below:
+<div class="something" markdown="1">
+<img src="https://i.imgur.com/s2MOYEo.png" alt="drawing" width="600" />
+</div>
+
+Nodejs and Express are used to create the Api endpoints and the server, Redis is used for caching while MySQl is used as the database storage.
+They are used to build a Rest Api which can be consumed by a front-end application. 
+The Api endpoints used for this application can be found in the app documentation through the following link: [postman documentation](https://documenter.getpostman.com/view/7132396/S1LsYVz3)
