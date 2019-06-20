@@ -1,83 +1,79 @@
-# Spree
+# eCommerce REST API
 
-[![codecov](https://codecov.io/gh/Dsalz/turingBackend/branch/develop/graph/badge.svg?token=BdOumjFaKT)](https://codecov.io/gh/Dsalz/turingBackend) [![Build Status](https://travis-ci.com/Dsalz/turingBackend.svg?token=qNmHgqwZcXDPqxv9epgB&branch=develop)](https://travis-ci.com/Dsalz/turingBackend)
+[![Build Status](https://travis-ci.com/gboyegadada/ecommerce-api.svg?token=kWsW2pqG86CpBXZyuBHc&branch=master)](https://travis-ci.com/gboyegadada/ecommerce-api)
 
-## Table of Contents
+A REST API based on NodeJS, Express, MySQL, and Knex using JSON Web Tokens (JWT) for authentication.
 
-* [About](#about)
-* [Getting Started](#gettingstarted)
-* [Documentation](#documentation)
-* [Testing](#testing)
-* [Dependencies](#dependencies)
+# Quick Start
 
-## About
+1. Clone the repo and navigate to project root 
 
-Backend API for shopping website
+2. Copy `.env.example` to `.env`
 
-## Getting Started
+3. Then run:
+    ```bash
+    $ docker-compose up -d
+    ```
 
-### Online
+## URLs
+- API: 
+    ```bash
+    http://localhost:49160
+    ```
+- Docs: 
+    ```bash
+    http://localhost:49160/docs
+    ```
+- MySQL: 
+    ```bash
+    $ mysql -u root -h localhost -Dapp -P 33062
+    ```
 
-* API is hosted on heroku at https://spreee-backend.herokuapp.com/api/v1
 
-### Locally
 
-* NB: A lot of env variables are required to get the project to run and commiting them would be highly unsafe so i've included a env.txt file with all the environment varables in the zip file sent on the turing platform. Create .env file in root directory and paste the contents of the env.txt file first.  You will need to set the NODE_ENV variable to production so the project knows to connect to the hosted sql server or create one locally and modify the localConnection configuration object in ./server/database/config.js with the server's configuration
 
-* Run ```npm install``` to install dependencies
+# Project structure
 
-* Run ```npm run build``` to transpile server files into a folder called dist
 
-* Run ```npm start``` to start the server and listen to port 3000
+## Architecture
 
-* API is now being served at http://localhost:3000/api/v1/
+This is an API first monolith app that uses a typical MVC flow. To improve performance I chose not use an ORM for the models but to use a query builder instead. Models are in `/repositories`, while Controllers are in `/controllers`. There are no views as they do not really apply here.
 
-## Documentation
+![](./dist/readme/express-rest-api.jpg)
 
-* Provided documentation https://backendapi.turing.com/docs/ was followed exactly in the creation of this project
+## Technologies 
 
-* Architecture employed is the MVC (Model view controller) architecture which is where the data and the presentation logic are kept separate and connected by the controller.
+### Server 
+- NodeJS + Express JS
+- PM2 for process management and clusters
+- MySQL with Knex query builder for database
+- Redis for caching and for rate limiter middleware
+- `compression` node library for gzip compression
+- `helmet` node library for header security
 
-* Authentication is done using the bearer scheme and api key is passed in the request header under 'USER_KEY'
+### Development
+- Docker containers (app, redis and mysql) with Docker Compose
+- Travis CI for integrated tests on pull requests
+- Snyk for npm package vulnerability scans
+- Mocha with Istanbul for testing and test coverage reporting
+- Bash scripts for docker compose hooks (e.g. waiting for MySQL container before running the server)
 
-* API utilizes SQL procedures for the most part when querying the database to avoid SQL injections
+# Adnvanced Requirements
+This is my first Node JS backend project (I use PHP with Symfony at work). Also it is hard to clearify what the "current" system can support without knowing it's architecture, technologies used and available resources but I tried to do a little research:
 
-* User input is thoroughly validated and sanitized before getting to the controllers
+1. **The current system can support 100,000 daily active users. How do you design a new system to support 1,000,000 daily active users?**
+    - Node JS is considered to be generally fast and efficient (which is why I chose it even though I have more experience with PHP)
+    - Avoid ORMs if possible because complex ORM calls can be Inefficient
+    - On database side, separating the objects (e.g. products) into a few different collections: all, most liked, newest, newest in stock and so forth. Whenever an item gets added, liked or ordered, the code checks if it (still) belongs to one of those collections and acts accordingly. This way the code can query from prepared collections instead of running complicated queries on one huge pile.
+    - Upload images to cloud storage like Google or AWS S3
+    - Use caching with Redis or in-memory
+    - Don’t use synchronous functions
+    - Implement gzip compression at a reverse proxy level
+    - Do not use `console.log()` or `console.error()` in production because they are synchronous functions (use a logging library like Winston or Bunyan)
+    - Running the app in a cluster and using a load balancer
+    - Use a process manager like PM2 or StrongLoop
 
-* Reusable code like queries and error codes are defined in one file and exported to where needed to keep the code D.R.Y and so that subsequent changes will only need to be made in only that one file
+2. **A half of the daily active users comes from United States. How do you design a new system to handle this case?**
+    
+    - I have no experience deploying an app with this kind of request volume but I would say maybe dedicate a larger cluster (with auto-scaling) to that region (in AWS for example) and a smaller cluster to less demanding regions.
 
-* Travis CI was used for continuous integration and CodeCov for code coverage reporting
-
-* All functions and methods were adequately documented
-
-## Testing
-
-* I hope you appreciate the effort i put into writing the tests for this project
-
-* Run ```npm test``` to run test suite
-
-* NB: reminder that the env variables are needed for the test suite to run. The test suite will only run once if you use the hosted database connection because in the test suite for customer sign up you'll be signing up a user and it's supposed to return a status 200 the first time but subsequent calls will return a status of 400 because the user's email will already be registered in the database from the first run.
-
-## Dependencies
-
-* Express - MVC Node framework used
-
-* JsonWebToken - For generating access tokens
-
-* Babel - for transpiling ES6 code down to ES5 in production
-
-* Eslint - for code linting
-
-* Mocha - for testing
-
-* Body-Parser - for parsing http requests
-
-* MySql - For communicating with the database
-
-* Passport - For social media authentication
-
-* Stripe - For payment integration
-
-* Cors - For cross origin resource sharing
-
-* SendGrid - For sending emails
