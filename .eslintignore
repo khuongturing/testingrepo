@@ -1,3 +1,2 @@
-/server/models/*.js
-/server/migrations/*.js
-/server/seeders/*.js
+
+/src/models/*
