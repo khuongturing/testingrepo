@@ -1,57 +1,34 @@
 {
-  "name": "ecommerce-api",
+  "name": "api",
   "version": "1.0.0",
-  "description": "An api for a tshirtshop",
+  "description": "Turing",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env process.env.NODE_ENV=test nyc mocha --require babel-register tests/*.js --recursive --exit",
-    "start": "node build/index.js",
-    "eslint": "eslint . --fix",
-    "dev": "cross-env process.env.NODE_ENV=development nodemon src/index.js --exec babel-node --",
-    "clean": "rm -rf dist && mkdir dist",
-    "postinstall": "babel src -d build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tonyguesswho/Ecommerce-api.git"
-  },
-  "author": "Anthony Ugwu",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tonyguesswho/Ecommerce-api/issues"
-  },
-  "homepage": "https://github.com/tonyguesswho/Ecommerce-api#readme",
   "dependencies": {
-    "@hapi/joi": "^15.0.0",
-    "@sendgrid/mail": "^6.4.0",
-    "async-redis": "^1.1.7",
-    "babel-polyfill": "^6.26.0",
-    "bcrypt": "^3.0.6",
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.19.0",
+    "card-validator": "^6.2.0",
     "cors": "^2.8.5",
-    "cross-env": "^5.2.0",
-    "dotenv": "^7.0.0",
-    "express": "^4.16.4",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
     "helmet": "^3.18.0",
+    "https": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.11",
-    "mysql2": "^1.6.5",
-    "newrelic": "^5.9.1",
-    "nyc": "^14.1.1",
-    "request": "^2.88.0",
-    "sequelize": "^5.7.3",
-    "sequelize-cli": "^5.4.0",
-    "stripe": "^6.34.0"
+    "morgan": "^1.9.1",
+    "mysql": "^2.17.1",
+    "node-fetch": "^2.6.0",
+    "pluralize": "^8.0.0",
+    "stripe": "^7.2.0",
+    "swagger-node-express": "^2.1.3",
+    "swagger-ui-express": "^4.0.6",
+    "swagger-ux": "^1.0.3",
+    "uniqid": "^5.0.3",
+    "validate-phone-number-node-js": "0.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.17.2",
-    "mocha": "^6.1.4",
-    "nodemon": "^1.18.11"
+    "nodemon": "^1.19.1"
   }
 }

@@ -1,0 +1,4137 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This API is built based on NodeJs With ExpressJs Framework using MVC and [`Swagger UI`](/api-docs/v1/)/[`ReDoc UI`](/api-docs/v2/) for the API Docs<br><br> HTTPS is available on port: 443 <br><br>[Github](https://github.com/Vichet97/Ecommerce-API-Backend)<br><br>`Success Responses`<br><br>  200 - success<br><br> `Errors Responses`<br><br> `Attribute's Errors`<br><br> 400 - ATT_01 - Doesn't exist attribute with this ID.<br><br> `Authentication's Errors`<br><br> 401 - AUT_01 - Authorization code is empty<br> 401 - AUT_02 - Access Unauthorized<br><br> `Category's Errors`<br><br> 400 - CAT_01 - Don't exist category with this ID<br><br> `Department's Errors`<br><br>  400 - DEP_01 - The ID is not a number<br> 400 - DEP_02 - Don'exist department with this ID<br><br> `User's Errors`<br><br>  400 - USR_01 - Email or Password is invalid<br>  400 - USR_02 - Invalid Field(s) Input <br>  400 - USR_03 - The email is invalid<br>     400 - USR_04 - The email already exists.<br> 400 - USR_05 - The email doesn't exist.<br> 400 - USR_06 - This is an invalid phone number<br> 400 - USR_07 - The filled in field is too long<br> 400 - USR_08 - This is an invalid Credit Card<br> 400 - USR_09 - The Shipping Region ID is not number<br> 400 - USR_10 - The field(s) are/is required.<br><br> `Pagination's Errors`<br><br> 400 - PAG_01 - Page Not Exist<br> 400 - PAG_02 - The field of order is not allow sorting<br> 400 - PAG_03 - Limit Not Valid.<br> 400 - PRO_01 - Don't exist product with this ID'<br>",
+    "version": "1.0.0",
+    "title": "Ecommerce API Documents",
+    "contact": {
+      "email": "hengsarathvichet@gmail.com"
+    }
+  },
+  "host": "asiantvcdn.duckdns.org:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/categories": {
+      "get": {
+        "description": "Return a list of categories.",
+        "summary": "Get All Categories",
+        "tags": [
+          "Categories"
+        ],
+        "operationId": "CategoriesGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Sorting by 'category_id', 'name'"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Show by page number, Default 1"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Limit Items per page, Default 20"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "rows": {
+                  "type": "object",
+                  "properties": {
+                    "category_id": {
+                      "type": "integer"
+                    },
+                    "department_id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "category_id",
+                    "department_id",
+                    "name",
+                    "description"
+                  ]
+                }
+              },
+              "required": [
+                "count",
+                "rows"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "count": 7,
+                "rows": [
+                  {
+                    "category_id": 4,
+                    "department_id": 2,
+                    "name": "Animal",
+                    "description": " Our ever-growing selection of beautiful animal T-shirts represents critters from everywhere, both wild and domestic. If you don't see the T-shirt with the animal you're looking for, tell us and we'll find it!"
+                  },
+                  {
+                    "category_id": 6,
+                    "department_id": 3,
+                    "name": "Christmas",
+                    "description": " Because this is a unique Christmas T-shirt that you'll only wear a few times a year, it will probably last for decades (unless some grinch nabs it from you, of course). Far into the future, after you're gone, your grandkids will pull it out and argue over who gets to wear it. What great snapshots they'll make dressed in Grandpa or Grandma's incredibly tasteful and unique Christmas T-shirt! Yes, everyone will remember you forever and what a silly goof you were when you would wear only your Santa beard and cap so you wouldn't cover up your nifty T-shirt."
+                  },
+                  {
+                    "category_id": 5,
+                    "department_id": 2,
+                    "name": "Flower",
+                    "description": "These unique and beautiful flower T-shirts are just the item for the gardener, flower arranger, florist, or general lover of things beautiful. Surprise the flower in your life with one of the beautiful botanical T-shirts or just get a few for yourself!"
+                  },
+                  {
+                    "category_id": 1,
+                    "department_id": 1,
+                    "name": "French",
+                    "description": "The French have always had an eye for beauty. One look at the T-shirts below and you'll see that same appreciation has been applied abundantly to their postage stamps. Below are some of our most beautiful and colorful T-shirts, so browse away! And don't forget to go all the way to the bottom - you don't want to miss any of them!"
+                  },
+                  {
+                    "category_id": 3,
+                    "department_id": 1,
+                    "name": "Irish",
+                    "description": "It was Churchill who remarked that he thought the Irish most curious because they didn't want to be English. How right he was! But then, he was half-American, wasn't he? If you have an Irish genealogy you will want these T-shirts! If you suddenly turn Irish on St. Patrick's Day, you too will want these T-shirts! Take a look at some of the coolest T-shirts we have!"
+                  },
+                  {
+                    "category_id": 2,
+                    "department_id": 1,
+                    "name": "Italian",
+                    "description": "The full and resplendent treasure chest of art, literature, music, and science that Italy has given the world is reflected splendidly in its postal stamps. If we could, we would dedicate hundreds of T-shirts to this amazing treasure of beautiful images, but for now we will have to live with what you see here. You don't have to be Italian to love these gorgeous T-shirts, just someone who appreciates the finer things in life!"
+                  },
+                  {
+                    "category_id": 7,
+                    "department_id": 3,
+                    "name": "Valentine's",
+                    "description": "For the more timid, all you have to do is wear your heartfelt message to get it across. Buy one for you and your sweetie(s) today!"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/{category_id}": {
+      "get": {
+        "description": "Return a Category by ID",
+        "summary": "Get Category by ID",
+        "tags": [
+          "Categories"
+        ],
+        "operationId": "CategoriesByCategoryIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "category_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Category ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            },
+            "examples": {
+              "application/json": {
+                "category_id": 1,
+                "department_id": 1,
+                "name": "French",
+                "description": "The French have always had an eye for beauty. One look at the T-shirts below and you'll see that same appreciation has been applied abundantly to their postage stamps. Below are some of our most beautiful and colorful T-shirts, so browse away! And don't forget to go all the way to the bottom - you don't want to miss any of them!"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "status": 400,
+                  "code": "CAT_01",
+                  "message": "Don't exist category with this ID",
+                  "field": "category_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/inProduct/{product_id}": {
+      "get": {
+        "description": "Return Categories of a Product",
+        "summary": "Get Categories of a Product",
+        "tags": [
+          "Categories"
+        ],
+        "operationId": "CategoriesInProductByProductIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Product ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "category_id": {
+                    "type": "integer"
+                  },
+                  "department_id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "category_id",
+                  "department_id",
+                  "name"
+                ]
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "category_id": 1,
+                  "department_id": 1,
+                  "name": "French"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/categories/inDepartment/{department_id}": {
+      "get": {
+        "description": "Return Categories of a Department",
+        "summary": "Get Categories of a Department",
+        "tags": [
+          "Categories"
+        ],
+        "operationId": "CategoriesInDepartmentByDepartmentIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "department_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Department ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/departments": {
+      "get": {
+        "description": "Return Collections of Department",
+        "summary": "Get Collections of Department",
+        "tags": [
+          "Departments"
+        ],
+        "operationId": "DepartmentsGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "department_id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "department_id",
+                  "name",
+                  "description"
+                ]
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "department_id": 1,
+                  "name": "Regional",
+                  "description": "Proud of your country? Wear a T-shirt with a national symbol stamp!"
+                },
+                {
+                  "department_id": 2,
+                  "name": "Nature",
+                  "description": "Find beautiful T-shirts with animals and flowers in our Nature department!"
+                },
+                {
+                  "department_id": 3,
+                  "name": "Seasonal",
+                  "description": "Each time of the year has a special flavor. Our seasonal T-shirts express traditional symbols using unique postal stamp pictures."
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/departments/{department_id}": {
+      "get": {
+        "description": "Return a Department by ID",
+        "summary": "Get Department by ID",
+        "tags": [
+          "Departments"
+        ],
+        "operationId": "DepartmentsByDepartmentIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "department_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Department ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "department_id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "department_id",
+                "name",
+                "description"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "department_id": 1,
+                "name": "Regional",
+                "description": "Proud of your country? Wear a T-shirt with a national symbol stamp!"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "status": 400,
+                  "code": "DEP_01",
+                  "message": "The ID is not a number.",
+                  "field": "department_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attributes": {
+      "get": {
+        "description": "Return array of attributes",
+        "summary": "Get Attribute List",
+        "tags": [
+          "Attributes"
+        ],
+        "operationId": "AttributesGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "title": "GetAttributeList",
+                "example": {
+                  "attribute_id": 1,
+                  "name": "Size"
+                },
+                "type": "object",
+                "properties": {
+                  "attribute_id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "attribute_id",
+                  "name"
+                ]
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "attribute_id": 1,
+                  "name": "Size"
+                },
+                {
+                  "attribute_id": 2,
+                  "name": "Color"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/attributes/{attribute_id}": {
+      "get": {
+        "description": "Return an Attribute",
+        "summary": "Get Attribute by ID",
+        "tags": [
+          "Attributes"
+        ],
+        "operationId": "AttributesByAttributeIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "attribute_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Attribute ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "title": "GetAttributebyID",
+              "example": {
+                "attribute_id": 1,
+                "name": "Size"
+              },
+              "type": "object",
+              "properties": {
+                "attribute_id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "attribute_id",
+                "name"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "attribute_id": 1,
+                "name": "Size"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "status": 400,
+                  "code": "ATT_01",
+                  "message": "Don'exist attribute with this ID.",
+                  "field": "attribute_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attributes/values/{attribute_id}": {
+      "get": {
+        "description": "Return Values of an Attribute",
+        "summary": "Get Attribut Values",
+        "tags": [
+          "Attributes"
+        ],
+        "operationId": "AttributesValuesByAttributeIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "attribute_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Attribute ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "attribute_value_id": {
+                    "type": "integer"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "attribute_value_id",
+                  "value"
+                ]
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "attribute_value_id": 1,
+                  "value": "S"
+                },
+                {
+                  "attribute_value_id": 2,
+                  "value": "M"
+                },
+                {
+                  "attribute_value_id": 3,
+                  "value": "L"
+                },
+                {
+                  "attribute_value_id": 4,
+                  "value": "XL"
+                },
+                {
+                  "attribute_value_id": 5,
+                  "value": "XXL"
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "status": 400,
+                  "code": "ATT_01",
+                  "message": "Don'exist attribute with this ID.",
+                  "field": "attribute_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attributes/inProduct/{attribute_id}": {
+      "get": {
+        "description": "Reutrn array of Attributes by Product ID",
+        "summary": "Get Attributes by Product ID",
+        "tags": [
+          "Attributes"
+        ],
+        "operationId": "AttributesInProductByAttributeIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "attribute_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Attribute ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "attribute_value_id": {
+                    "type": "integer"
+                  },
+                  "attribute_value": {
+                    "type": "string"
+                  },
+                  "attribute_name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "attribute_value_id"
+                ]
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "attribute_value_id": 1,
+                  "attribute_value": "S",
+                  "attribute_name": "Size"
+                },
+                {
+                  "attribute_value_id": 2
+                },
+                {
+                  "attribute_value_id": 3
+                },
+                {
+                  "attribute_value_id": 4
+                },
+                {
+                  "attribute_value_id": 5
+                },
+                {
+                  "attribute_value_id": 6
+                },
+                {
+                  "attribute_value_id": 7
+                },
+                {
+                  "attribute_value_id": 8
+                },
+                {
+                  "attribute_value_id": 9
+                },
+                {
+                  "attribute_value_id": 10,
+                  "attribute_value": "Yellow",
+                  "attribute_name": "Color"
+                },
+                {
+                  "attribute_value_id": 11,
+                  "attribute_value": "Green",
+                  "attribute_name": "Color"
+                },
+                {
+                  "attribute_value_id": 12,
+                  "attribute_value": "Blue",
+                  "attribute_name": "Color"
+                },
+                {
+                  "attribute_value_id": 13,
+                  "attribute_value": "Indigo",
+                  "attribute_name": "Color"
+                },
+                {
+                  "attribute_value_id": 14,
+                  "attribute_value": "Purple",
+                  "attribute_name": "Color"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "description": "Return array of Product",
+        "summary": "Get Product List",
+        "tags": [
+          "Products"
+        ],
+        "operationId": "ProductsGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Show by page number, Default 1"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Limit Items Per Page, Default: 20"
+          },
+          {
+            "name": "description_length",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Description Length, Default: 200"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "title": "GetProductList",
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "title": "Row1",
+                    "example": {
+                      "product_id": 1,
+                      "name": "Arc d'Triomphe",
+                      "description": "This beautiful and iconic T-shirt will no doubt lead you to your own triumph.",
+                      "price": 14.99,
+                      "discounted_price": 0,
+                      "thumbnail": "arc-d-triomphe-thumbnail.gif"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "product_id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "price": {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      "discounted_price": {
+                        "type": "number"
+                      },
+                      "thumbnail": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "product_id",
+                      "name",
+                      "description",
+                      "price",
+                      "discounted_price",
+                      "thumbnail"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "count",
+                "rows"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/products/search": {
+      "get": {
+        "description": "Return Search Result",
+        "summary": "Search Product",
+        "tags": [
+          "Products"
+        ],
+        "operationId": "ProductsSearchGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "query_string",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Search Query"
+          },
+          {
+            "name": "all_words",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Available values : on, off<br>Default: on"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Show by page number, Default 1"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Limit Items Per Page, Default: 20"
+          },
+          {
+            "name": "description_length",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Description Length, Default: 200"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product_id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "price": {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      "discounted_price": {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      "thumbnail": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "product_id",
+                      "name",
+                      "description",
+                      "price",
+                      "discounted_price",
+                      "thumbnail"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "count",
+                "rows"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "count": 2,
+                "rows": [
+                  {
+                    "product_id": 83,
+                    "name": "Weather Vane",
+                    "description": "This weather vane dates from the 1830's and is still showing which way the wind blows! Trumpet your arrival with this unique Christmas T-shirt.",
+                    "price": 15.95,
+                    "discounted_price": 14.99,
+                    "thumbnail": "weather-vane-thumbnail.gif"
+                  },
+                  {
+                    "product_id": 89,
+                    "name": "The Virgin Mary",
+                    "description": "This stained glass window is found in Glasgow Cathedral, Scotland, and was created by Gabriel Loire of France, one of the most prolific of artists in this medium--and now you can have it on this wonde",
+                    "price": 16.95,
+                    "discounted_price": 15.95,
+                    "thumbnail": "the-virgin-mary-thumbnail.gif"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{product_id}": {
+      "get": {
+        "description": "Return a Product By ID",
+        "summary": "Get Product By ID",
+        "tags": [
+          "Products"
+        ],
+        "operationId": "ProductsByProductIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Product ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            },
+            "examples": {
+              "application/json": {
+                "product_id": 1,
+                "name": "Arc d'Triomphe",
+                "description": "This beautiful and iconic T-shirt will no doubt lead you to your own triumph.",
+                "price": 14.99,
+                "discounted_price": 0,
+                "image": "arc-d-triomphe.gif",
+                "image_2": "arc-d-triomphe-2.gif",
+                "thumbnail": "arc-d-triomphe-thumbnail.gif",
+                "display": 0
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "status": 400,
+                  "code": "PRO_01",
+                  "message": "Don't exist product with this ID",
+                  "field": "product_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/inCategory/{category_id}": {
+      "get": {
+        "description": "Return array of Product",
+        "summary": "Get Product of a Category",
+        "tags": [
+          "Products"
+        ],
+        "operationId": "ProductsInCategoryByCategoryIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "category_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Product Category ID"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Show by page number, Default 1"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Limit Items per page, Default 20"
+          },
+          {
+            "name": "description_length",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Description Length, Default: 200"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "product_id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "discounted_price": {
+                  "type": "number"
+                },
+                "image": {
+                  "type": "string"
+                },
+                "image_2": {
+                  "type": "string"
+                },
+                "thumbnail": {
+                  "type": "string"
+                },
+                "display": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "product_id",
+                "name",
+                "description",
+                "price",
+                "discounted_price",
+                "image",
+                "image_2",
+                "thumbnail",
+                "display"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "product_id": 1,
+                "name": "Arc d'Triomphe",
+                "description": "This beautiful and iconic T-shirt will no doubt lead you to your own triumph.",
+                "price": 14.99,
+                "discounted_price": 0,
+                "image": "arc-d-triomphe.gif",
+                "image_2": "arc-d-triomphe-2.gif",
+                "thumbnail": "arc-d-triomphe-thumbnail.gif",
+                "display": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/inDepartment/{department_id}": {
+      "get": {
+        "description": "Return array of Product",
+        "summary": "Get Product by Department",
+        "tags": [
+          "Products"
+        ],
+        "operationId": "ProductsInDepartmentByDepartmentIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "department_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Product Department ID"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Show by page number, Default 1"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Limit Items per page, Default 20"
+          },
+          {
+            "name": "description_length",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Description Length, Default: 200"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product_id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "price": {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      "discounted_price": {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      "thumbnail": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "product_id",
+                      "name",
+                      "description",
+                      "price",
+                      "discounted_price",
+                      "thumbnail"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "count",
+                "rows"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "count": 16,
+                "rows": [
+                  {
+                    "product_id": 10,
+                    "name": "Haute Couture",
+                    "description": "This stamp publicized the dress making industry. Use it to celebrate the T-shirt industry!",
+                    "price": 15.99,
+                    "discounted_price": 14.95,
+                    "thumbnail": "haute-couture-thumbnail.gif"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{product_id}/details": {
+      "get": {
+        "description": "Return product detail",
+        "summary": "Get Product Details",
+        "tags": [
+          "Products"
+        ],
+        "operationId": "ProductsDetailsByProductIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Product ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "product_id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "discounted_price": {
+                    "type": "number"
+                  },
+                  "image": {
+                    "type": "string"
+                  },
+                  "image_2": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "product_id",
+                  "name",
+                  "description",
+                  "price",
+                  "discounted_price",
+                  "image",
+                  "image_2"
+                ]
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "product_id": 1,
+                  "name": "Arc d'Triomphe",
+                  "description": "This beautiful and iconic T-shirt will no doubt lead you to your own triumph.",
+                  "price": 14.99,
+                  "discounted_price": 0,
+                  "image": "arc-d-triomphe.gif",
+                  "image_2": "arc-d-triomphe-2.gif"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/products/{product_id}/locations": {
+      "get": {
+        "description": "Return product location",
+        "summary": "Get Product Location",
+        "tags": [
+          "Products"
+        ],
+        "operationId": "ProductsLocationsByProductIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Product ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "category_id": {
+                    "type": "integer"
+                  },
+                  "category_name": {
+                    "type": "string"
+                  },
+                  "department_id": {
+                    "type": "integer"
+                  },
+                  "department_name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "category_id",
+                  "category_name",
+                  "department_id",
+                  "department_name"
+                ]
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "category_id": 1,
+                  "category_name": "French",
+                  "department_id": 1,
+                  "department_name": "Regional"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/products/{product_id}/reviews": {
+      "get": {
+        "description": "Return array of product reviews",
+        "summary": "Get Product Reviews",
+        "tags": [
+          "Products"
+        ],
+        "operationId": "ProductsReviewsByProductIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Product ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "review": {
+                    "type": "string"
+                  },
+                  "rating": {
+                    "type": "integer"
+                  },
+                  "created_on": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "review",
+                  "rating",
+                  "created_on"
+                ]
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "name": "Eder Taveira",
+                  "review": "That's a good product. The best for me.",
+                  "rating": 5,
+                  "created_on": "2019-02-17 13:57:29"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Return msg",
+        "summary": "Post Product Reviews",
+        "tags": [
+          "Products"
+        ],
+        "operationId": "ProductsReviewsByProductIdPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Product ID"
+          },
+          {
+            "name": "review",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Review  of Product"
+          },
+          {
+            "name": "rating",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "Rating  of Product"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "$ref": "#/definitions/Success"
+                }
+              },
+              "required": [
+                "success"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "success": {
+                  "status": 200,
+                  "message": "success"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "status": 401,
+                  "code": "AUT_02",
+                  "message": "Access Unauthorized",
+                  "field": "NoAuth"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accessToken": []
+          }
+        ]
+      }
+    },
+    "/tax": {
+      "get": {
+        "description": "Return array of taxes",
+        "summary": "Get All Taxes",
+        "tags": [
+          "Tax"
+        ],
+        "operationId": "TaxGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "tax_id": {
+                    "type": "integer"
+                  },
+                  "tax_type": {
+                    "type": "string"
+                  },
+                  "tax_percentage": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                },
+                "required": [
+                  "tax_id",
+                  "tax_type",
+                  "tax_percentage"
+                ]
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "tax_id": 1,
+                  "tax_type": "Sales Tax at 8.5%",
+                  "tax_percentage": 8.5
+                },
+                {
+                  "tax_id": 2,
+                  "tax_type": "No Tax",
+                  "tax_percentage": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/tax/{tax_id}": {
+      "get": {
+        "description": "Return a Tax details",
+        "summary": "Get a Specific Tax",
+        "tags": [
+          "Tax"
+        ],
+        "operationId": "TaxByTaxIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tax_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Tax ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tax_id": {
+                  "type": "integer"
+                },
+                "tax_type": {
+                  "type": "string"
+                },
+                "tax_percentage": {
+                  "type": "number",
+                  "format": "double"
+                }
+              },
+              "required": [
+                "tax_id",
+                "tax_type",
+                "tax_percentage"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "tax_id": 1,
+                "tax_type": "Sales Tax at 8.5%",
+                "tax_percentage": 8.5
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "status": 400,
+                  "code": "TAX_01",
+                  "message": "The ID is not a number.",
+                  "field": "tax_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shipping/regions": {
+      "get": {
+        "description": "Get Array of All Shipping Regions",
+        "summary": "Get All Shipping Regions",
+        "tags": [
+          "Shipping"
+        ],
+        "operationId": "ShippingRegionsGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "shipping_region_id": {
+                    "type": "integer"
+                  },
+                  "shipping_region": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "shipping_region_id",
+                  "shipping_region"
+                ]
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "shipping_region_id": 1,
+                  "shipping_region": "Please Select"
+                },
+                {
+                  "shipping_region_id": 2,
+                  "shipping_region": "US / Canada"
+                },
+                {
+                  "shipping_region_id": 3,
+                  "shipping_region": "Europe"
+                },
+                {
+                  "shipping_region_id": 4,
+                  "shipping_region": "Rest of World"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/shipping/regions/{shipping_region_id}": {
+      "get": {
+        "description": "Return Shipping Region details",
+        "summary": "Get a Shipping Region By ID",
+        "tags": [
+          "Shipping"
+        ],
+        "operationId": "ShippingRegionsByShippingRegionIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "shipping_region_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Shipping Region ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "shipping_id": {
+                    "type": "integer"
+                  },
+                  "shipping_type": {
+                    "type": "string"
+                  },
+                  "shipping_cost": {
+                    "type": "number"
+                  },
+                  "shipping_region_id": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "shipping_id",
+                  "shipping_type",
+                  "shipping_cost",
+                  "shipping_region_id"
+                ]
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "shipping_id": 1,
+                  "shipping_type": "Next Day Delivery ($20)",
+                  "shipping_cost": 20,
+                  "shipping_region_id": 2
+                },
+                {
+                  "shipping_id": 2,
+                  "shipping_type": "3-4 Days ($10)",
+                  "shipping_cost": 10,
+                  "shipping_region_id": 2
+                },
+                {
+                  "shipping_id": 3,
+                  "shipping_type": "7 Days ($5)",
+                  "shipping_cost": 5,
+                  "shipping_region_id": 2
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/stripe/charge": {
+      "post": {
+        "description": "Return Object from Stripe<br>Guide: https://stripe.com/docs/api/charges/create",
+        "summary": "Post Stripe Charge Token From Front-End and Make Charge Request",
+        "tags": [
+          "Stripe"
+        ],
+        "operationId": "StripeChargePost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "stripeToken",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Stripe API Charge Token, Example for Getting the Token: https://stripe.com/docs/stripe-js/elements/quickstart"
+          },
+          {
+            "name": "order_id",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "Order ID to Store in Stripe metadata"
+          },
+          {
+            "name": "description",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Order Description"
+          },
+          {
+            "name": "amount",
+            "in": "formData",
+            "required": true,
+            "type": "number",
+            "description": "Charge Amount"
+          },
+          {
+            "name": "currency",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Charge Currency, Default : USD<br>Supported Currencies:  https://stripe.com/docs/currencies"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "text/plain": "Object from Stripe"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/stripe/webhooks": {
+      "post": {
+        "description": "Note: Not For Using With Fornt-End, It's used to provide as endpoint in Stripe Webhook on Stripe Dashboard: https://dashboard.stripe.com/test/webhooks",
+        "summary": "For Using with Stripe webhooks for synchronization",
+        "tags": [
+          "Stripe"
+        ],
+        "operationId": "StripewebhooksPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "text/plain": "Response From Stripe for Usage"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/shoppingcart/generateUniqueId": {
+      "get": {
+        "description": "Return Unique Cart ID",
+        "summary": "Generate Unique Cart ID",
+        "tags": [
+          "Shoppingcart"
+        ],
+        "operationId": "ShoppingcartGenerateUniqueIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cart_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cart_id"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "cart_id": "mu1js99v9n1"
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/shoppingcart/add": {
+      "post": {
+        "description": "Return array of products in cart",
+        "summary": "Add Product to Cart",
+        "tags": [
+          "Shoppingcart"
+        ],
+        "operationId": "ShoppingcartAddPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "cart_id",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Cart ID"
+          },
+          {
+            "name": "product_id",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Product ID"
+          },
+          {
+            "name": "attributes",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Product Attribute"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "item_id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "attributes": {
+                    "type": "string"
+                  },
+                  "product_id": {
+                    "type": "integer"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "quantity": {
+                    "type": "integer"
+                  },
+                  "image": {
+                    "type": "string"
+                  },
+                  "subtotal": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "item_id",
+                  "name",
+                  "attributes",
+                  "product_id",
+                  "price",
+                  "quantity",
+                  "image",
+                  "subtotal"
+                ]
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "item_id": 2,
+                  "name": "Arc d'Triomphe",
+                  "attributes": "LG, red",
+                  "product_id": 2,
+                  "price": "14.99",
+                  "quantity": 1,
+                  "image": "arc-d-triomphe.gif",
+                  "subtotal": "14.99"
+                }
+              ]
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "USR_10",
+                  "message": "The field(s) are/is required.",
+                  "status": 400
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shoppingcart/{cart_id}": {
+      "get": {
+        "description": "Return Array of Products in Shopping Cart",
+        "summary": "Get List of Products in Shopping Cart",
+        "tags": [
+          "Shoppingcart"
+        ],
+        "operationId": "ShoppingcartByCartIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cart_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Cart ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "item_id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "attributes": {
+                    "type": "string"
+                  },
+                  "product_id": {
+                    "type": "integer"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "quantity": {
+                    "type": "integer"
+                  },
+                  "image": {
+                    "type": "string"
+                  },
+                  "subtotal": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "item_id",
+                  "name",
+                  "attributes",
+                  "product_id",
+                  "price",
+                  "quantity",
+                  "image",
+                  "subtotal"
+                ]
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "item_id": 2,
+                  "name": "Arc d'Triomphe",
+                  "attributes": "LG, red",
+                  "product_id": 2,
+                  "price": "14.99",
+                  "quantity": 1,
+                  "image": "arc-d-triomphe.gif",
+                  "subtotal": "14.99"
+                }
+              ]
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/shoppingcart/update/{item_id}": {
+      "put": {
+        "description": "Return a array of products in the cart",
+        "summary": "Update the cart by item",
+        "tags": [
+          "Shoppingcart"
+        ],
+        "operationId": "ShoppingcartUpdateByItemIdPut",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "Quantity",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Item Quantity"
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Item ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "item_id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "attributes": {
+                    "type": "string"
+                  },
+                  "product_id": {
+                    "type": "integer"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "quantity": {
+                    "type": "integer"
+                  },
+                  "subtotal": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "item_id",
+                  "name",
+                  "attributes",
+                  "product_id",
+                  "price",
+                  "quantity",
+                  "subtotal"
+                ]
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "item_id": 2,
+                  "name": "Arc d'Triomphe",
+                  "attributes": "LG, red",
+                  "product_id": "1",
+                  "price": "14.99",
+                  "quantity": 1,
+                  "subtotal": "14.99"
+                }
+              ]
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "USR_10",
+                  "message": "The field(s) are/is required.",
+                  "status": 400
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shoppingcart/empty/{cart_id}": {
+      "delete": {
+        "description": "Return a empty array",
+        "summary": "Empty cart",
+        "tags": [
+          "Shoppingcart"
+        ],
+        "operationId": "ShoppingcartEmptyByCartIdDelete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cart_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Cart ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "application/json": {
+                                      "success": {
+                                        "status": 200,
+                                        "message": "success"
+                                      }
+                                  }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "message": "Cart Not Available"
+                },
+                "status": 400
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shoppingcart/moveToCart/{item_id}": {
+      "get": {
+        "description": "Return success message ",
+        "summary": "Move a product to cart",
+        "tags": [
+          "Shoppingcart"
+        ],
+        "operationId": "ShoppingcartMoveToCartByItemIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Item ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "application/json": {         "success": {           "status": 200,           "message": "success"         }     }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "message": "Item Not Available"
+                },
+                "status": 400
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shoppingcart/totalAmount/{cart_id}": {
+      "get": {
+        "description": "Return the total amount",
+        "summary": "Return a total Amount from Cart",
+        "tags": [
+          "Shoppingcart"
+        ],
+        "operationId": "ShoppingcartTotalAmountByCartIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cart_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Cart ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "total_amount": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "total_amount"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "total_amount": 5
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "message": "Cart Not Available"
+                },
+                "status": 400
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shoppingcart/saveForLater/{item_id}": {
+      "get": {
+        "description": "Return success message ",
+        "summary": "Save a Product for latter",
+        "tags": [
+          "Shoppingcart"
+        ],
+        "operationId": "ShoppingcartSaveForLaterByItemIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Item ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "application/json": {         "success": {           "status": 200,           "message": "success"         }     }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "message": "Item Not Available"
+                },
+                "status": 400
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shoppingcart/getSaved/{cart_id}": {
+      "get": {
+        "description": "Return a object if item salved",
+        "summary": "Get Products saved for latter",
+        "tags": [
+          "Shoppingcart"
+        ],
+        "operationId": "ShoppingcartGetSavedByCartIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cart_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Cart ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "item_id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "attributes": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "item_id",
+                "name",
+                "attributes",
+                "price"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "item_id": 1,
+                "name": "Tshit",
+                "attributes": "LG, red",
+                "price": "15.90"
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "message": "Cart Not Available"
+                },
+                "status": 400
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shoppingcart/removeProduct/{item_id}": {
+      "delete": {
+        "description": "Return a success message ",
+        "summary": "Remove a product in the cart",
+        "tags": [
+          "Shoppingcart"
+        ],
+        "operationId": "ShoppingcartRemoveProductByItemIdDelete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Item ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "application/json": {         "success": {           "status": 200,           "message": "success"         }     }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "message": "Cart Not Available"
+                },
+                "status": 400
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer": {
+      "put": {
+        "description": "Return a Customer Object ",
+        "summary": "Update a customer",
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "CustomerPut",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "security": [
+          {
+            "accessToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Customer's name"
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Customer's email"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Customer password"
+          },
+          {
+            "name": "day_phone",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Customer day phone"
+          },
+          {
+            "name": "eve_phone",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Customer eve phone"
+          },
+          {
+            "name": "mob_phone",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Customer mob phone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "$ref": "#/definitions/Success"
+                }
+              },
+              "required": [
+                "success"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "success": {
+                  "status": 200,
+                  "message": "success"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "status": 401,
+                  "code": "AUT_02",
+                  "message": "Access Unauthorized",
+                  "field": "NoAuth"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Return a Object of Customer with auth credencials",
+        "summary": "Get a customer by ID. The customer ID is parsed in Token, extract it",
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "CustomerGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "accessToken": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            },
+            "examples": {
+              "application/json": {
+                "customer_id": 1,
+                "name": "test",
+                "email": "test@test.com",
+                "address_1": "PP",
+                "address_2": "",
+                "city": "",
+                "region": "",
+                "postal_code": "",
+                "country": "",
+                "shipping_region_id": 1,
+                "day_phone": "+123442133434235",
+                "eve_phone": "+3243242353244325",
+                "mob_phone": "+7456346345234525",
+                "credit_card": "XXXXXXXX3452"
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "status": 401,
+                  "code": "AUT_02",
+                  "message": "Access Unauthorized",
+                  "field": "NoAuth"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers": {
+      "post": {
+        "description": "Return a Object of Customer with auth credencials<br>",
+        "summary": "Register a Customer",
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "CustomersPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Name of User"
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Email of User"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Password of User"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customer": {
+                  "$ref": "#/definitions/Customer"
+                },
+                "accessToken": {
+                  "type": "string"
+                },
+                "expires_in": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "customer",
+                "accessToken",
+                "expires_in"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "customer": {
+                  "schema": {
+                    "customer_id": 1,
+                    "name": "test@test.com",
+                    "email": "123456",
+                    "address_1": "PP",
+                    "address_2": "",
+                    "city": "",
+                    "region": "",
+                    "postal_code": "",
+                    "country": "",
+                    "shipping_region_id": 1,
+                    "day_phone": "+236523213511235",
+                    "eve_phone": "+8663614321523",
+                    "mob_phone": "+12324213511235",
+                    "credit_card": "XXXXXXXX4573"
+                  }
+                },
+                "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE1NTA0MjQ0OTgsImV4cCI6MTU1MDUxMDg5OH0.aEFrNUPRWuRWx0IOEL-_A4J4Ti39iXEHAScm6GI61RR",
+                "expires_in": "24h"
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "USR_10",
+                  "message": "The field(s) are/is required.",
+                  "status": 400
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/login": {
+      "post": {
+        "description": "Return a Object of Customer with auth credencials<br>",
+        "summary": "Sign in the Shopping",
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "CustomersLoginPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "Email of User"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Password of User"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Login"
+            },
+            "examples": {
+              "application/json": {
+                "customer": {
+                  "schema": {
+                    "customer_id": 1,
+                    "name": "test@test.com",
+                    "email": "123456",
+                    "address_1": "PP",
+                    "address_2": "",
+                    "city": "",
+                    "region": "",
+                    "postal_code": "",
+                    "country": "",
+                    "shipping_region_id": 1,
+                    "day_phone": "+236523213511235",
+                    "eve_phone": "+8663614321523",
+                    "mob_phone": "+12324213511235",
+                    "credit_card": "XXXXXXXX4573"
+                  }
+                },
+                "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE1NTA0MjQ0OTgsImV4cCI6MTU1MDUxMDg5OH0.aEFrNUPRWuRWx0IOEL-_A4J4Ti39iXEHAScm6GI61RR",
+                "expires_in": "24h"
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "USR_01",
+                  "message": "Email or Password is invalid",
+                  "status": 400
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/facebook": {
+      "post": {
+        "description": "Return a Object of Customer with auth credencials<br>",
+        "summary": "Sign in with a facebook login token",
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "CustomersFacebookPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Token generated from Facebook login"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Login"
+            },
+            "examples": {
+              "application/json": {
+                "customer": {
+                  "schema": {
+                    "customer_id": 1,
+                    "name": "test@test.com",
+                    "email": "123456",
+                    "address_1": "PP",
+                    "address_2": "",
+                    "city": "",
+                    "region": "",
+                    "postal_code": "",
+                    "country": "",
+                    "shipping_region_id": 1,
+                    "day_phone": "+236523213511235",
+                    "eve_phone": "+8663614321523",
+                    "mob_phone": "+12324213511235",
+                    "credit_card": "XXXXXXXX4573"
+                  }
+                },
+                "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE1NTA0MjQ0OTgsImV4cCI6MTU1MDUxMDg5OH0.aEFrNUPRWuRWx0IOEL-_A4J4Ti39iXEHAScm6GI61RR",
+                "expires_in": "24h"
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "USR_10",
+                  "message": "The field(s) are/is required.",
+                  "status": 400
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/address": {
+      "put": {
+        "description": "Return a Customer Object<br>",
+        "summary": "Update the address from customer",
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "CustomersAddressPut",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "security": [
+          {
+            "accessToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "address_1",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Address 1"
+          },
+          {
+            "name": "address_2",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Address 2"
+          },
+          {
+            "name": "city",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "City"
+          },
+          {
+            "name": "region",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Region"
+          },
+          {
+            "name": "postal_code",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Postal Code"
+          },
+          {
+            "name": "country",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Country"
+          },
+          {
+            "name": "shpping_region_id",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Shipping Region ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Success"
+            },
+            "examples": {
+              "application/json": {
+                "success": {
+                  "status": 200,
+                  "message": "success"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "USR_10",
+                  "message": "The field(s) are/is required.",
+                  "status": 400
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "status": 401,
+                  "code": "AUT_02",
+                  "message": "Access Unauthorized",
+                  "field": "NoAuth"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/creditCard": {
+      "put": {
+        "description": "Return a Customer Object<br>",
+        "summary": "Update the credit card from customer",
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "CustomersCreditCardPut",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "security": [
+          {
+            "accessToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "credit_card",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Credit Card"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Success"
+            },
+            "examples": {
+              "application/json": {
+                "success": {
+                  "status": 200,
+                  "message": "success"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "USR_10",
+                  "message": "The field(s) are/is required.",
+                  "status": 400
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "status": 401,
+                  "code": "AUT_02",
+                  "message": "Access Unauthorized",
+                  "field": "NoAuth"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders": {
+      "post": {
+        "security": [
+          {
+            "accessToken": []
+          }
+        ],
+        "description": "Return the Order ID",
+        "summary": "Create an Order",
+        "tags": [
+          "Orders"
+        ],
+        "operationId": "OrdersPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+
+          {
+            "name": "cart_id",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "Cart ID"
+          },
+          {
+            "name": "shipping_id",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Shipping ID"
+          },
+          {
+            "name": "tax_id",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Tax ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "orderId": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "orderId"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "orderId": 1
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "status": 401,
+                  "code": "AUT_02",
+                  "message": "Access Unauthorized",
+                  "field": "NoAuth"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/{order_id}": {
+      "get": {
+        "security": [
+          {
+            "accessToken": []
+          }
+        ],
+        "description": "Return Order Info by Order ID",
+        "summary": "Get Order Info",
+        "tags": [
+          "Orders"
+        ],
+        "operationId": "OrdersByOrderIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Order ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "order_id": {
+                  "type": "integer"
+                },
+                "product_id": {
+                  "type": "integer"
+                },
+                "attributes": {
+                  "type": "string"
+                },
+                "product_name": {
+                  "type": "string"
+                },
+                "quantity": {
+                  "type": "integer"
+                },
+                "unit_cost": {
+                  "type": "number"
+                },
+                "subtotal": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "order_id",
+                "product_id",
+                "attributes",
+                "product_name",
+                "quantity",
+                "unit_cost",
+                "subtotal"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "order_id": 1,
+                "product_id": 1,
+                "attributes": "LG, Red",
+                "product_name": "Arc d'Triomphe",
+                "quantity": 1,
+                "unit_cost": "14.99",
+                "subtotal": "14.99"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "title": "GetordersbyCustomer",
+              "example": {
+                "order_id": 1,
+                "total_amount": 0,
+                "created_on": "2019-06-20T18:41:23Z",
+                "shipped_on": null,
+                "status": 0,
+                "name": "test4"
+              },
+              "type": "object",
+              "properties": {
+                "order_id": {
+                  "type": "integer"
+                },
+                "total_amount": {
+                  "type": "number"
+                },
+                "created_on": {
+                  "type": "string"
+                },
+                "shipped_on": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "order_id",
+                "total_amount",
+                "created_on",
+                "status",
+                "name"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "status": 401,
+                  "code": "AUT_02",
+                  "message": "Access Unauthorized",
+                  "field": "NoAuth"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "message": "Order not found."
+                },
+                "status": 404
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/inCustomer": {
+      "get": {
+        "security": [
+          {
+            "accessToken": []
+          }
+        ],
+        "description": "Return a array of Orders<br>",
+        "summary": "Get orders by Customer",
+        "tags": [
+          "Orders"
+        ],
+        "operationId": "OrdersInCustomerGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            },
+            "examples": {
+              "application/json": {
+                "order_id": 1,
+                "total_amount": 0,
+                "created_on": "2019-06-20T18:41:23Z",
+                "shipped_on": null,
+                "status": 0,
+                "name": "test4"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "$ref": "#/definitions/Error"
+                }
+              },
+              "required": [
+                "error"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "status": 401,
+                  "code": "AUT_02",
+                  "message": "Access Unauthorized",
+                  "field": "NoAuth"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "title": "Error9",
+                  "example": {
+                    "message": "Cart Not Available"
+                  },
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                },
+                "status": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "error",
+                "status"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "message": "No Orders available for this Customer"
+                },
+                "status": 404
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/shortDetail/{order_id}": {
+      "get": {
+        "security": [
+          {
+            "accessToken": []
+          }
+        ],
+        "description": "Return Order Info by Order ID",
+        "summary": "Get Order Short Info",
+        "tags": [
+          "Orders"
+        ],
+        "operationId": "OrdersShortDetailByOrderIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Order ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "order_id": {
+                  "type": "integer"
+                },
+                "total_amount": {
+                  "type": "number"
+                },
+                "created_on": {
+                  "type": "string"
+                },
+                "shipped_on": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "order_id",
+                "total_amount",
+                "created_on",
+                "status",
+                "name"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "order_id": 1,
+                "total_amount": 0,
+                "created_on": "2019-06-20T18:41:23Z",
+                "shipped_on": null,
+                "status": 0,
+                "name": "test4"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "title": "Error7",
+                  "example": {
+                    "code": "USR_10",
+                    "message": "The field(s) are/is required.",
+                    "status": 400
+                  },
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "status"
+                  ]
+                }
+              },
+              "required": [
+                "error"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "USR_02",
+                  "message": "Invalid Field(s) Input",
+                  "status": 400
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "status": 401,
+                  "code": "AUT_02",
+                  "message": "Access Unauthorized",
+                  "field": "NoAuth"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Attribute": {
+      "title": "Attribute",
+      "example": {
+        "attribute_id": 1,
+        "name": "Size"
+      },
+      "type": "object",
+      "properties": {
+        "attribute_id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "attribute_id",
+        "name"
+      ]
+    },
+    "Category": {
+      "title": "Category",
+      "example": {
+        "category_id": 4,
+        "department_id": 2,
+        "name": "Animal",
+        "description": " Our ever-growing selection of beautiful animal T-shirts represents critters from everywhere, both wild and domestic. If you don't see the T-shirt with the animal you're looking for, tell us and we'll find it!"
+      },
+      "type": "object",
+      "properties": {
+        "category_id": {
+          "type": "integer"
+        },
+        "department_id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "category_id",
+        "department_id",
+        "name",
+        "description"
+      ]
+    },
+    "Customer": {
+      "title": "Customer",
+      "example": {
+        "schema": {
+          "customer_id": 1,
+          "name": "test@test.com",
+          "email": "123456",
+          "address_1": "PP",
+          "address_2": "",
+          "city": "",
+          "region": "",
+          "postal_code": "",
+          "country": "",
+          "shipping_region_id": 1,
+          "day_phone": "+236523213511235",
+          "eve_phone": "+8663614321523",
+          "mob_phone": "+12324213511235",
+          "credit_card": "XXXXXXXX4573"
+        }
+      },
+      "type": "object",
+      "properties": {
+        "customer_id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address_1": {
+          "type": "string"
+        },
+        "address_2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "shipping_region_id": {
+          "type": "integer"
+        },
+        "day_phone": {
+          "type": "string"
+        },
+        "eve_phone": {
+          "type": "string"
+        },
+        "mob_phone": {
+          "type": "string"
+        },
+        "credit_card": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "customer_id",
+        "name",
+        "email",
+        "address_1",
+        "address_2",
+        "city",
+        "region",
+        "postal_code",
+        "country",
+        "shipping_region_id",
+        "day_phone",
+        "eve_phone",
+        "mob_phone",
+        "credit_card"
+      ]
+
+    },
+    "Department": {
+      "title": "Department",
+      "example": {
+        "department_id": 1,
+        "name": "Regional",
+        "description": "Proud of your country? Wear a T-shirt with a national symbol stamp!"
+      },
+      "type": "object",
+      "properties": {
+        "department_id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "department_id",
+        "name",
+        "description"
+      ]
+    },
+    "Product": {
+      "title": "Product",
+      "example": {
+        "product_id": 1,
+        "name": "Arc d'Triomphe",
+        "description": "This beautiful and iconic T-shirt will no doubt lead you to your own triumph.",
+        "price": 14.99,
+        "discounted_price": 0,
+        "image": "arc-d-triomphe.gif",
+        "image_2": "arc-d-triomphe-2.gif",
+        "thumbnail": "arc-d-triomphe-thumbnail.gif",
+        "display": 0
+      },
+      "type": "object",
+      "properties": {
+        "product_id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "discounted_price": {
+          "type": "number"
+        },
+        "image": {
+          "type": "string"
+        },
+        "image_2": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "display": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "product_id",
+        "name",
+        "description",
+        "price",
+        "discounted_price",
+        "image",
+        "image_2",
+        "thumbnail",
+        "display"
+      ]
+    },
+    "Tax": {
+      "title": "Tax",
+      "example": {
+        "tax_id": 1,
+        "tax_type": "Sales Tax at 8.5%",
+        "tax_percentage": 8.5
+      },
+      "type": "object",
+      "properties": {
+        "tax_id": {
+          "type": "integer"
+        },
+        "tax_type": {
+          "type": "string"
+        },
+        "tax_percentage": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "tax_id",
+        "tax_type",
+        "tax_percentage"
+      ]
+    },
+    "Shipping": {
+      "title": "Shipping",
+      "example": {
+        "shipping_id": 1,
+        "shipping_type": "Next Day Delivery ($20)",
+        "shipping_cost": 20,
+        "shipping_region_id": 2
+      },
+      "type": "object",
+      "properties": {
+        "shipping_id": {
+          "type": "integer"
+        },
+        "shipping_type": {
+          "type": "string"
+        },
+        "shipping_cost": {
+          "type": "number"
+        },
+        "shipping_region_id": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "shipping_id",
+        "shipping_type",
+        "shipping_cost",
+        "shipping_region_id"
+      ]
+    },
+    "UniqueCartID": {
+      "title": "Unique Cart ID",
+      "example": {
+        "cart_id": "mu1js99v9n1"
+      },
+      "type": "object",
+      "properties": {
+        "cart_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "cart_id"
+      ]
+    },
+    "Order": {
+      "title": "Order",
+      "example": {
+        "order_id": 1,
+        "product_id": 1,
+        "attributes": "LG, Red",
+        "product_name": "Arc d'Triomphe",
+        "quantity": 1,
+        "unit_cost": "14.99",
+        "subtotal": "14.99"
+      },
+      "type": "object",
+      "properties": {
+        "order_id": {
+          "type": "integer"
+        },
+        "product_id": {
+          "type": "integer"
+        },
+        "attributes": {
+          "type": "string"
+        },
+        "product_name": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "unit_cost": {
+          "type": "number"
+        },
+        "subtotal": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "order_id",
+        "product_id",
+        "attributes",
+        "product_name",
+        "quantity",
+        "unit_cost",
+        "subtotal"
+      ]
+    },
+    "Login": {
+      "title": "Login",
+      "example": {
+        "customer": {
+          "schema": {
+            "customer_id": 1,
+            "name": "test@test.com",
+            "email": "123456",
+            "address_1": "PP",
+            "address_2": "",
+            "city": "",
+            "region": "",
+            "postal_code": "",
+            "country": "",
+            "shipping_region_id": 1,
+            "day_phone": "+236523213511235",
+            "eve_phone": "+8663614321523",
+            "mob_phone": "+12324213511235",
+            "credit_card": "XXXXXXXX4573"
+          }
+        },
+        "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE1NTA0MjQ0OTgsImV4cCI6MTU1MDUxMDg5OH0.aEFrNUPRWuRWx0IOEL-_A4J4Ti39iXEHAScm6GI61RR",
+        "expires_in": "24h"
+      },
+      "type": "object",
+      "properties": {
+        "customer": {
+          "$ref": "#/definitions/Customer"
+        },
+        "accessToken": {
+          "type": "string"
+        },
+        "expires_in": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "customer",
+        "accessToken",
+        "expires_in"
+      ]
+    },
+    "Success": {
+      "title": "Success",
+      "example": {
+        "status": 200,
+        "message": "success"
+      },
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "message"
+      ]
+    },
+    "Error": {
+      "title": "Error",
+      "example": {
+        "status": 400,
+        "code": "CAT_01",
+        "message": "Don't exist category with this ID",
+        "field": "category_id"
+      },
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer"
+        },
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "field": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "code",
+        "message",
+        "field"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "accessToken": {
+      "type": "apiKey",
+      "name": "USER-KEY",
+      "in": "header"
+    }
+  },
+  "tags": [
+    {
+      "name": "Categories",
+      "description": "Categories Route"
+    },
+    {
+      "name": "Departments",
+      "description": "Departments Route"
+    },
+    {
+      "name": "Attributes",
+      "description": "Attributes Route"
+    },
+    {
+      "name": "Products",
+      "description": "Products Route"
+    },
+    {
+      "name": "Tax",
+      "description": "Tax Route"
+    },
+    {
+      "name": "Shipping",
+      "description": "Shipping Route"
+    },
+    {
+      "name": "Stripe",
+      "description": "Stripe Route"
+    },
+    {
+      "name": "Shoppingcart",
+      "description": "Shoppingcart Route"
+    },
+    {
+      "name": "Customers",
+      "description": "Customers Route"
+    },
+    {
+      "name": "Orders",
+      "description": "Orders Route"
+    }
+  ]
+}
