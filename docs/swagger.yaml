@@ -1,0 +1,1658 @@
+openapi: 3.0.0
+info:
+  title: Turing API developed by Meshack Mbuvi for fun
+  description: API endpoints for Turing API
+
+version: 0.1.9
+
+servers:
+  - url: https://turing-api-endpoints.herokuapp.com/api
+
+components:
+  securitySchemes:
+    USER-KEY:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Product:
+      type: object
+      properties:
+        product_id:
+          type: number
+          example: 1
+        name:
+          type: string
+          example: Chartres Cathedral
+        description:
+          type: string
+          example: "\"The Fur Merchants\". Not all the beautiful stained glass in the great cathedrals depicts saints and angels! Lay aside your furs for the summer and wear this beautiful T-shirt!"
+        price:
+          type: number
+          example: 18.95
+        discounted_price:
+          type: number
+          example: 18.95
+        thumbnail:
+          type: string
+          example: chartres-cathedral-thumbnail.gif
+    Products:
+      type: array
+      items:
+        $ref: '#components/schemas/Product'
+    Department:
+      type: object
+      properties:
+        department_id:
+          type: number
+          example: 1
+        name:
+          type: string
+          example: Regional
+        description:
+          type: string
+          example: Proud of your country? Wear a T-shirt with a national symbol stamp!
+    Departments:
+      type: array
+      items:
+        $ref: '#components/schemas/Department'
+    Category:
+      type: object
+      properties:
+        category_id:
+          type: number
+          example: 1
+        department_id:
+          type: number
+          example: 3
+        name:
+          type: string
+          example: Regional
+        description:
+          type: string
+          example: It was Churchill who remarked that he thought the Irish most curious because they didn't want to be English. How right he was! But then, he was half-American, wasn't he? If you have an Irish genealogy you will want these T-shirts! If you suddenly turn Irish on St. Patrick's Day, you too will want these T-shirts! Take a look at some of the coolest T-shirts we have!"
+    Categories:
+      type: array
+      items:
+        $ref: '#components/schemas/Category'
+    Review:
+      type: object
+      properties:
+        review:
+          type: string
+          example: That is a good product
+        created_on:
+          type: string
+          example: "2019-02-17 13:57:29"
+        name:
+          type: string
+          example: Eder Taveira
+        rating:
+          type: number
+          example: 4
+    Reviews:
+      type: array
+      items:
+        $ref: '#components/schemas/Review'
+    Attribute:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Size
+        attribute_id:
+          type: number
+          example: 4
+    Attributes:
+      type: array
+      items:
+        $ref: '#components/schemas/Attribute'
+    CartItem:
+      type: object
+      properties:
+        item_id:
+          type: number
+          example: 1
+        name:
+          type: string
+          example: "Arc d'Triomphe"
+        attributes:
+          type: string
+          example: L,Red
+        product_id:
+          type: number
+          example: 1
+        image:
+          type: string
+          example: arc-d-triomphe.gif
+        price:
+          type: string
+          example: 14.99
+        quantity:
+          type: number
+          example: 2
+        subtotal: 28.98
+    CartItems:
+      type: array
+      items:
+        $ref: '#components/schemas/CartItem'
+    Customer:
+      type: object
+      properties:
+        customer_id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: Lannucci
+        email:
+          type: string
+          example: test@gmail.com
+        address_1:
+          type: string
+        address_2:
+          type: string
+        city:
+          type: string
+        region:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+        shipping_region:
+          type: number
+          example: 1
+        day_phone:
+          type: string
+        eve_phone:
+          type: string
+        mob_phone:
+          type: string
+        credit_card:
+          type: string
+paths:
+  /products:
+    get:
+      summary: Retrieve all products
+      description: Retrieve all products from api
+      tags:
+        - Products
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: Inform the page. Starting with 1. Default: 1
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Limit per page, Default: 20.
+        - in: query
+          name: description_length
+          schema:
+            type: integer
+          description: Limit of the description, Default: 200.
+      responses:
+        200:
+          description: Get All Products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                    example: 40
+                  rows:
+                    $ref: '#components/schemas/Products'
+  /products/{product_id}:
+    get:
+      summary: Retrieve a single product
+      description: Retrieve a product
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Get All Products
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/schemas/Product'
+        404:
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        example: PROD_02
+                      message:
+                        type: string
+                        example: Product not found
+                      field:
+                        type: string
+                        example: product_id
+                      status:
+                        type: number
+                        example: 404
+  /products/{product_id}/locations:
+    get:
+      summary: Get product location details
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Product location details
+          content:
+            application/json:
+              schema:
+              type: object
+                properties:
+                  category_id:
+                    type: number
+                    example: 1
+                  category_name:
+                    type: string
+                    example: French
+                  department_id:
+                    type: number
+                    example: 1
+                  department_name:
+                    type: string
+                    example: Regional
+        404:
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        example: PROD_02
+                      message:
+                        type: string
+                        example: Product not found
+                      field:
+                        type: string
+                        example: product_id
+                      status:
+                        type: number
+                        example: 404
+  /products/inCategory/{category_id}:
+    get:
+      summary: Retrieve all products in a category
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: category_id
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: Inform the page. Starting with 1. Default: 1
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Limit per page, Default: 20.
+        - in: query
+          name: description_length
+          schema:
+            type: integer
+          description: Limit of the description, Default: 200.
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                    example: 40
+                  rows:
+                    $ref: '#components/schemas/Products'
+        404:
+          description: Category not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        example: CAT_02
+                      message:
+                        type: string
+                        example: Category not found
+                      field:
+                        type: string
+                        example: category_id
+                      status:
+                        type: number
+                        example: 404
+  /products/inDepartment/{department_id}:
+    get:
+      summary: Retrieve all products in a category
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: department_id
+          description: Id of the department
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: Inform the page. Starting with 1. Default: 1
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Limit per page, Default: 20.
+        - in: query
+          name: description_length
+          schema:
+            type: integer
+          description: Limit of the description, Default: 200.
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                    example: 40
+                  rows:
+                    $ref: '#components/schemas/Products'
+        404:
+          description: Department not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        example: DEP_02
+                      message:
+                        type: string
+                        example: Department not found
+                      field:
+                        type: string
+                        example: department_id
+                      status:
+                        type: number
+                        example: 404
+  /products/search:
+    get:
+      summary: Search products
+      tags:
+        - Products
+      parameters:
+        - in: query
+          name: query_string
+          description: Query to search
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: Inform the page. Starting with 1. Default: 1
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Limit per page, Default: 20.
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                    example: 40
+                  rows:
+                    $ref: '#components/schemas/Products'
+  /products/{product_id}/reviews:
+    get:
+      summary: Get product reviews
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          schema:
+            type: number
+            example: 1
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/schemas/Reviews'
+        404:
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        example: PROD_02
+                      message:
+                        type: string
+                        example: Product not found
+                      field:
+                        type: string
+                        example: product_id
+                      status:
+                        type: number
+                        example: 404
+    post:
+      summary: Add product reviews
+      tags:
+        - Products
+      security:
+        - {}
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          schema:
+            type: number
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                review:
+                  type: string
+                  example: This was a good product
+                rating:
+                  type: number
+                  example: 3
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/schemas/Review'
+        404:
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        example: PROD_02
+                      message:
+                        type: string
+                        example: Product not found
+                      field:
+                        type: string
+                        example: product_id
+                      status:
+                        type: number
+                        example: 404
+
+  /departments:
+    get:
+      summary: Retrieve all departments
+      description: Return a list of departments
+      tags:
+        - Departments
+      responses:
+        200:
+          description: Get All departments
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/schemas/Departments'
+  /departments/{department_id}:
+    get:
+      summary: Get a department
+      description: Get a department
+      tags:
+        - Departments
+      parameters:
+        - in: path
+          name: department_id
+          required: true
+          schema:
+            type: integer
+          description: ID of Department
+      responses:
+        200:
+          description: Get a department
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/schemas/Department'
+        404:
+          description: Department not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        example: DEP_02
+                      message:
+                        type: string
+                        example: Department not found
+                      field:
+                        type: string
+                        example: department_id
+                      status:
+                        type: number
+                        example: 404
+  /categories:
+    get:
+      summary: Get categories
+      description: Return a list of categories
+      tags:
+        - Category
+      parameters:
+        - in: path
+          name: category_id
+          schema:
+            type: integer
+          description: ID of a category
+      responses:
+        200:
+          description: Get All categories
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                    example: 40
+                  rows:
+                    $ref: '#components/schemas/Categories'
+  /categories/{category_id}:
+    get:
+      summary: Get a single category
+      description: Return a category
+      tags:
+        - Category
+      parameters:
+        - in: path
+          name: category_id
+          required: true
+          schema:
+            type: integer
+          description: ID of a category
+      responses:
+        200:
+          description: Get a categories
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/schemas/Categories'
+        404:
+          description: Category not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        example: CAT_02
+                      message:
+                        type: string
+                        example: Category not found
+                      field:
+                        type: string
+                        example: category_id
+                      status:
+                        type: number
+                        example: 404
+  /categories/inDepartment/{department_id}:
+    get:
+      summary: Get categories of a department
+      description: Return a list of categories
+      tags:
+        - Category
+      parameters:
+        - in: path
+          name: department_id
+          required: true
+          schema:
+            type: integer
+          description: ID of a department
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                    example: 40
+                  rows:
+                    $ref: '#components/schemas/Categories'
+        404:
+          description: Department not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        example: DEP_02
+                      message:
+                        type: string
+                        example: Department not found
+                      field:
+                        type: string
+                        example: department_id
+                      status:
+                        type: number
+                        example: 404
+
+  /attributes:
+    get:
+      summary: Retrieve all product attributes
+      tags:
+        - Attributes
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/schemas/Attributes'
+  /attributes/{attribute_id}:
+    get:
+      summary: Retrieve a product attribute
+      tags:
+        - Attributes
+      parameters:
+        - in: path
+          name: attribute_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/schemas/Attribute'
+        404:
+          description: attribute not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        example: PAT_02
+                      message:
+                        type: string
+                        example: attribute not found
+                      field:
+                        type: string
+                        example: attribute_id
+                      status:
+                        type: number
+                        example: 404
+  /attributes/values/{attribute_id}:
+    get:
+      summary: Get values of an attribute
+      tags:
+        - Attributes
+      parameters:
+        - in: path
+          name: attribute_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  attribute_value_id:
+                    type: integer
+                    example: 1
+                  value:
+                    type: string
+                    example: S
+        404:
+          description: attribute not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        example: PAT_02
+                      message:
+                        type: string
+                        example: attribute not found
+                      field:
+                        type: string
+                        example: attribute_id
+                      status:
+                        type: number
+                        example: 404
+  /attributes/inProduct/{product_id}:
+    get:
+      summary: Get all attributes in a product
+      tags:
+        - Attributes
+      parameters:
+        - in: path
+          name: product_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  attribute_value_id:
+                    type: integer
+                    example: 1
+                  attribute_value:
+                    type: string
+                    example: S
+                  attribute_value:
+                    type: string
+                    example: Size
+        404:
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        example: PROD_02
+                      message:
+                        type: string
+                        example: Attribute not found
+                      field:
+                        type: string
+                        example: product_id
+                      status:
+                        type: number
+                        example: 404
+
+  /shoppingcart/generateUniqueId:
+    get:
+      summary: Generate a unique CART ID
+      tags:
+        - Shopping cart
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cart_id:
+                    type: string
+                    example: 123hgdre6
+  /shoppingcart/add:
+    post:
+      summary: Add a product to the cart
+      tags:
+        - Shopping cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cart_id:
+                  type: string
+                  example: 123sdf34
+                product_id:
+                  type: number
+                  example: 1
+                attributes:
+                  type: string
+                  example: L,Red
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+                $ref: '#components/schemas/CartItems'
+  /shoppingcart/{cart_id}:
+    get:
+      summary: Get all items in the shopping cart
+      tags:
+        - Shopping cart
+      parameters:
+        - in: path
+          name: cart_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/schemas/CartItems'
+        404:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: CART_01
+                      message:
+                        type: string
+                        example: Cart with provided cart_id does not exist
+                      field:
+                        type: string
+                        example: cart_id
+                      status:
+                        type: string
+                        example: 404
+  /shoppingcart/update/{item_id}:
+    put:
+      summary: Update item quantity in the cart
+      tags:
+        - Shopping cart
+      parameters:
+        - in: path
+          name: item_id
+          description: ID of the item to be updated
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: number
+                  example: 3
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/schemas/CartItems'
+        400:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: CART_02
+                      message:
+                        type: string
+                        example: Quantity must be provided
+                      field:
+                        type: string
+                        example: quantity
+                      status:
+                        type: string
+                        example: 400
+        404:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: CART_02
+                      message:
+                        type: string
+                        example: Item with provided id does not exist in the cart
+                      field:
+                        type: string
+                        example: cart_id
+                      status:
+                        type: string
+                        example: 404
+  /shoppingcart/empty/{cart_id}:
+    delete:
+      summary: Remove all items from shopping cart
+      tags:
+        - Shopping cart
+      parameters:
+        - in: path
+          name: cart_id
+          description: ID of the cart
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+  /shoppingcart/totalAmount/{cart_id}:
+    get:
+      summary: Return total amount from cart
+      tags:
+        - Shopping cart
+      parameters:
+        - in: path
+          name: cart_id
+          description: ID of the cart
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Return the total amount
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_amount:
+                    type: number
+                    example: 50
+        404:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: CART_02
+                      message:
+                        type: string
+                        example: Cart with provided ID not found
+                      field:
+                        type: string
+                        example: quantity
+                      status:
+                        type: string
+                        example: 404
+  /shoppingcart/removeProduct/{item_id}:
+    delete:
+      summary: Remove item from cart
+      tags:
+        - Shopping cart
+      parameters:
+        - in: path
+          name: item_id
+          description: ID of the item
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: Item removed from cart
+  /orders:
+    post:
+      summary: Create an order
+      tags:
+        - Orders
+      security:
+        - {}
+        - USER-KEY: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cart_id:
+                  type: string
+                  example: 3sdfhg24
+                shipping_id:
+                  type: number
+                  example: 1
+                tax_id:
+                  type: number
+                  example: 1
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order_id:
+                    type: number
+                    example: 1
+        404:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: CAT_02
+                  message:
+                    type: number
+                    example: cart with given cart_id does not exist
+                  field:
+                    type: string
+                    example: cart_id
+                  status:
+                    type: number
+                    example: 404
+  /orders/{order_id}:
+    get:
+      summary: Retrieve a single order
+      tags:
+        - Orders
+      security:
+        - {}
+        - USER-KEY: []
+      parameters:
+        - in: path
+          name: order_id
+          description: ID of the order
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order_id:
+                    type: number
+                    example: 1
+        404:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: ORD_02
+                  message:
+                    type: number
+                    example: order with given order_id does not exist
+                  field:
+                    type: string
+                    example: order_id
+                  status:
+                    type: number
+                    example: 404
+        401:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: AUT_02
+                  message:
+                    type: number
+                    example: API key is invalid
+                  field:
+                    type: string
+                    example: API-KEY
+                  status:
+                    type: number
+                    example: 401
+  /orders/inCustomer:
+    get:
+      summary: Get orders by customer
+      tags:
+        - Orders
+      security:
+        - {}
+        - USER-KEY: []
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order_id:
+                    type: number
+                    example: 1
+        401:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: AUT_02
+                  message:
+                    type: number
+                    example: API key is invalid
+                  field:
+                    type: string
+                    example: API-KEY
+                  status:
+                    type: number
+                    example: 401
+  /orders/shortDetail/{order_id}:
+    get:
+      summary: Get info about order
+      tags:
+        - Orders
+      security:
+        - {}
+        - USER-KEY: []
+      parameters:
+        - in: path
+          name: order_id
+          description: ID of the order
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order_id:
+                    type: number
+                    example: 1
+                  total_amount:
+                    type: number
+                    example: 10.09
+                  created_on:
+                    type: string
+                    example: ''
+                  shipped_on:
+                    type: string
+                    example: ''
+                  status:
+                    type: string
+                    example: paid
+        404:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: ORD_02
+                  message:
+                    type: number
+                    example: order with given order_id does not exist
+                  field:
+                    type: string
+                    example: order_id
+                  status:
+                    type: number
+                    example: 404
+        401:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: AUT_02
+                  message:
+                    type: number
+                    example: API key is invalid
+                  field:
+                    type: string
+                    example: API-KEY
+                  status:
+                    type: number
+                    example: 401
+  /stripe/charge:
+    post:
+      summary: Charge customer for order placed
+      tags:
+        - Stripe
+      security:
+        - {}
+        - USER-KEY: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                stripeToken:
+                  type: string
+                  description: The API token, for the customer
+                order_id:
+                  type: number
+                  example: 1
+                  description: The order ID recorded when placing an order
+                description:
+                  type: string
+                  description: Description of an order
+                amount:
+                  type: number
+                  example: 1
+                  description: Total amount to be charged
+                currency:
+                  type: string
+                  example: USD
+                  description: One of the currencies supported by stripe API https://stripe.com/docs/currencies, the default Default value (USD)
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order_id:
+                    type: number
+                    example: 1
+                  total_amount:
+                    type: number
+                    example: 10.09
+                  created_on:
+                    type: string
+                    example: ''
+                  shipped_on:
+                    type: string
+                    example: ''
+                  status:
+                    type: string
+                    example: paid
+  /customers:
+    post:
+      summary: Register a customer
+      tags:
+        - Customers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the user
+                email:
+                  type: string
+                  description: Email of the user
+                password:
+                  type: string
+                  description: Password of user
+      responses:
+        201:
+          description: Return an object of customer with auth credentials
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customer:
+                    type: object
+                    properties:
+                      schema:
+                        type: object
+                        $ref: '#components/schemas/Customer'
+                  accessToken:
+                    type: string
+                    example: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE1NTA0MjQ0OTgsImV4cCI6MTU1MDUxMDg5OH0.aEFrNUPRWuRWx0IOEL-_A4J4Ti39iXEHAScm6GI61RR'
+                  expires in:
+                    type: string
+                    example: 24h
+        400:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: USR_02
+                  message:
+                    type: string
+                    example: The field example is empty.
+                  field:
+                    type: string
+                    example: example
+                  status:
+                    type: string
+                    example: 400
+    get:
+      description: Retrieve a single customer
+      tags:
+        - Customers
+      security:
+        - {}
+        - USER-KEY: []
+      responses:
+        200:
+          description: Return an object of customer
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/schemas/Customer'
+    put:
+      description: Update customer details
+      tags:
+        - Customers
+      security:
+        - {}
+        - USER-KEY: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                day_phone:
+                  type: string
+                eve_phone:
+                  type: string
+                mob_phone:
+                  type: string
+                name:
+                  type: string
+                email:
+                  type: string
+      responses:
+        200:
+          description: Return an object of customer
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/schemas/Customer'
+  /customers/login:
+    post:
+      summary: Login a customer
+      tags:
+        - Customers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Email of the user
+                password:
+                  type: string
+                  description: Password of user
+      responses:
+        200:
+          description: Return an object of customer with auth credentials
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customer:
+                    type: object
+                    properties:
+                      schema:
+                        type: object
+                        $ref: '#components/schemas/Customer'
+                  accessToken:
+                    type: string
+                    example: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE1NTA0MjQ0OTgsImV4cCI6MTU1MDUxMDg5OH0.aEFrNUPRWuRWx0IOEL-_A4J4Ti39iXEHAScm6GI61RR'
+                  expires in:
+                    type: string
+                    example: 24h
+        401:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: USR_02
+                  message:
+                    type: string
+                    example: Wrong email or password.
+                  field:
+                    type: string
+                    example: example
+                  status:
+                    type: string
+                    example: 401
+  /customers/address:
+    put:
+      summary: Update customer address details
+      tags:
+        - Customers
+      security:
+        - {}
+        - USER-KEY: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address_1:
+                  type: string
+                  description: Address 1
+                address_2:
+                  type: string
+                  description: Address 2
+                city:
+                  type: string
+                  description: city
+                region:
+                  type: string
+                  description: region
+                postal_code:
+                  type: string
+                  description: Postal code
+                country:
+                  type: string
+                  description: Country
+                shipping_region_id:
+                  type: string
+                  description: shipping region id
+      responses:
+        200:
+          description: Return an object of customer
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/schemas/Customer'
+        401:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: USR_02
+                  message:
+                    type: string
+                    example: Wrong email or password.
+                  field:
+                    type: string
+                    example: example
+                  status:
+                    type: string
+  /customers/creditCard:
+    put:
+      summary: Update customer credit card details
+      tags:
+        - Customers
+      security:
+        - {}
+        - USER-KEY: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                credit_card:
+                  type: string
+                  description: Credit card number
+      responses:
+        200:
+          description: Return an object of customer
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#components/schemas/Customer'
+        401:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: USR_02
+                  message:
+                    type: string
+                    example: Wrong email or password.
+                  field:
+                    type: string
+                    example: example
+                  status:
+                    type: string
