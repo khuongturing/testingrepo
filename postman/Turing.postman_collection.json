@@ -1,0 +1,1851 @@
+{
+	"info": {
+		"_postman_id": "ee7dbba0-9990-45d7-9d5a-39ee1b13304d",
+		"name": "Turing",
+		"description": "API's for T-shirt e-commerce website",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Create customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8eda3afc-1d1c-415c-a9b7-e06ff6746f6b",
+								"exec": [
+									"if(responseCode.code === 200) {",
+									"    const response = JSON.parse(responseBody);",
+									"    pm.environment.set(\"customer_id\", response.customer.customer_id);",
+									"    pm.environment.set(\"customer_accessToken\", response.accessToken);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Mayur\",\n\t\"email\": \"{{customer_email}}\",\n\t\"password\": \"{{customer_password}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get customer by accessToken",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update customer data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "824bea79-5b34-4c57-9c6f-7975f9918735",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Mayur\",\n    \"email\": \"{{customer_email}}\",\n    \"password\": \"{{customer_password}}\",\n    \"day_phone\": \"12344321\",\n    \"eve_phone\": \"12344321\",\n    \"mob_phone\": \"12344321\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update customer address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"address_1\": \"India\",\n    \"address_2\": \"Karnataka\",\n    \"city\": \"Bangalore\",\n    \"region\": \"Whitefield\",\n    \"postal_code\": \"560066\",\n    \"country\": \"India\",\n    \"shipping_region_id\": 3\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customers/address",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update customer credit card",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"credit_card\": \"1234567\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customers/creditCard",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers",
+								"creditCard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b9ee42be-9f9e-40a7-94f2-8f314a1749e6",
+								"exec": [
+									"if(responseCode.code === 200) {",
+									"    const response = JSON.parse(responseBody);",
+									"    pm.environment.set(\"customer_id\", response.customer.customer_id);",
+									"    pm.environment.set(\"customer_accessToken\", response.accessToken);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"{{customer_email}}\",\n\t\"password\": \"{{customer_password}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customers/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attribute",
+			"item": [
+				{
+					"name": "Get attribute list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "66652b0b-75c8-417d-8a9b-9b6353b74d43",
+								"exec": [
+									"if(responseCode.code === 200) {",
+									"    const response = JSON.parse(responseBody);",
+									"    pm.environment.set(\"attribute_id\", response[0].attribute_id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/attributes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attributes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get attribute by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/attributes/{{attribute_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attributes",
+								"{{attribute_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get attribute values",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/attributes/values/{{attribute_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attributes",
+								"values",
+								"{{attribute_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get attribute in product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/attributes/inProduct/{{product_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attributes",
+								"inProduct",
+								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "287481d7-f011-45ca-a32a-73250e2e7f33",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f956a697-5b6f-4b8d-905a-231a4e72613f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Department",
+			"item": [
+				{
+					"name": "Get department list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ff17fdd4-9222-4ff9-8507-a9a13dd5b65d",
+								"exec": [
+									"if(responseCode.code === 200) {",
+									"    const response = JSON.parse(responseBody);",
+									"    pm.environment.set(\"department_id\", response[0].department_id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/departments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"departments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get department by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/departments/{{department_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"departments",
+								"{{department_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get products list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cbe77790-b476-4501-914d-71236e83c7a6",
+								"exec": [
+									"if(responseCode.code === 200) {",
+									"    const response = JSON.parse(responseBody);",
+									"    if(response.rows.length > 0) {",
+									"        pm.environment.set(\"product_id\", response.rows[0].product_id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products?page=1&limit=10&description_length=20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "description_length",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cbe77790-b476-4501-914d-71236e83c7a6",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/search?page=1&limit=10&description_length=20&query_string=shirt&all_words=on",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"search"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "description_length",
+									"value": "20"
+								},
+								{
+									"key": "query_string",
+									"value": "shirt"
+								},
+								{
+									"key": "all_words",
+									"value": "on"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get product by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cbe77790-b476-4501-914d-71236e83c7a6",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/{{product_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get products in category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cbe77790-b476-4501-914d-71236e83c7a6",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/inCategory/{{category_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"inCategory",
+								"{{category_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get products in department",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cbe77790-b476-4501-914d-71236e83c7a6",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/inDepartment/{{department_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"inDepartment",
+								"{{department_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get product details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cbe77790-b476-4501-914d-71236e83c7a6",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/{{product_id}}/details",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"{{product_id}}",
+								"details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get product locations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cbe77790-b476-4501-914d-71236e83c7a6",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/{{product_id}}/locations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"{{product_id}}",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create product review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cbe77790-b476-4501-914d-71236e83c7a6",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"product_id\": \"{{product_id}}\",\n\t\"review\": \"Great product\",\n\t\"rating\": 5\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/{{product_id}}/reviews",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"{{product_id}}",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get product reviews",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cbe77790-b476-4501-914d-71236e83c7a6",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/{{product_id}}/reviews",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"{{product_id}}",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get categories list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6e08a7cc-9527-4620-b540-02cbc34ddbff",
+								"exec": [
+									"if(responseCode.code === 200) {",
+									"    const response = JSON.parse(responseBody);",
+									"    if(response.rows.length > 0) {",
+									"        pm.environment.set(\"category_id\", response.rows[0].category_id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/categories?page=1&limit=20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get category by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/categories/{{category_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								"{{category_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get categories in product id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/categories/inProduct/{{product_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								"inProduct",
+								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get categories in department id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/categories/inDepartment/{{department_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								"inDepartment",
+								"{{department_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tax",
+			"item": [
+				{
+					"name": "List all taxes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ba63fac8-720d-43c2-82e8-6969bb8e8195",
+								"exec": [
+									"if(responseCode.code === 200) {",
+									"    const response = JSON.parse(responseBody);",
+									"    if(response.length > 0) {",
+									"        pm.environment.set(\"tax_id\", response[0].tax_id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tax",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tax"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get tax by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ba63fac8-720d-43c2-82e8-6969bb8e8195",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tax/{{tax_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tax",
+								"{{tax_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shipping",
+			"item": [
+				{
+					"name": "List shipping regions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f7c4e03b-f0f3-4c72-bc6d-ae55b8d21789",
+								"exec": [
+									"if(responseCode.code === 200) {",
+									"    const response = JSON.parse(responseBody);",
+									"    if(response.length > 0) {",
+									"        pm.environment.set(\"shipping_region_id\", response[0].shipping_region_id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/shipping/regions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shipping",
+								"regions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get shipping region by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f7c4e03b-f0f3-4c72-bc6d-ae55b8d21789",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/shipping/regions/{{shipping_region_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shipping",
+								"regions",
+								"{{shipping_region_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ShoppingCart",
+			"item": [
+				{
+					"name": "Generate unique cart id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "306b539a-81b2-4135-bfa8-a0ebc9725853",
+								"exec": [
+									"if(responseCode.code === 200) {",
+									"    const response = JSON.parse(responseBody);",
+									"    pm.environment.set(\"cart_id\", response.cart_id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/shoppingcart/generateUniqueId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shoppingcart",
+								"generateUniqueId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add product to cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "306b539a-81b2-4135-bfa8-a0ebc9725853",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cart_id\": \"{{cart_id}}\",\n\t\"product_id\": {{product_id}},\n\t\"attributes\": \"Size, M\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/shoppingcart/add",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shoppingcart",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get products in cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "306b539a-81b2-4135-bfa8-a0ebc9725853",
+								"exec": [
+									"if(responseCode.code === 200) {",
+									"    const response = JSON.parse(responseBody);",
+									"    if(response.length > 0) {",
+									"        pm.environment.set(\"item_id\", response[0].item_id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/shoppingcart/{{cart_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shoppingcart",
+								"{{cart_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update item in cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "306b539a-81b2-4135-bfa8-a0ebc9725853",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"quantity\": 2\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/shoppingcart/update/{{item_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shoppingcart",
+								"update",
+								"{{item_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Move item to cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "306b539a-81b2-4135-bfa8-a0ebc9725853",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/shoppingcart/moveToCart/{{item_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shoppingcart",
+								"moveToCart",
+								"{{item_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get total cart amount",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "306b539a-81b2-4135-bfa8-a0ebc9725853",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/shoppingcart/totalAmount/{{cart_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shoppingcart",
+								"totalAmount",
+								"{{cart_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save product for later",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "306b539a-81b2-4135-bfa8-a0ebc9725853",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/shoppingcart/saveForLater/{{item_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shoppingcart",
+								"saveForLater",
+								"{{item_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get saved products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "306b539a-81b2-4135-bfa8-a0ebc9725853",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/shoppingcart/getSaved/{{cart_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shoppingcart",
+								"getSaved",
+								"{{cart_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove product from cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "306b539a-81b2-4135-bfa8-a0ebc9725853",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/shoppingcart/removeProduct/{{item_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shoppingcart",
+								"removeProduct",
+								"{{item_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Empty shopping cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "306b539a-81b2-4135-bfa8-a0ebc9725853",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/shoppingcart/empty/{{cart_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shoppingcart",
+								"empty",
+								"{{cart_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate unique cart id : repeat this",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "306b539a-81b2-4135-bfa8-a0ebc9725853",
+								"exec": [
+									"if(responseCode.code === 200) {",
+									"    const response = JSON.parse(responseBody);",
+									"    pm.environment.set(\"cart_id\", response.cart_id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/shoppingcart/generateUniqueId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shoppingcart",
+								"generateUniqueId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add product to cart: repeat this",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "306b539a-81b2-4135-bfa8-a0ebc9725853",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cart_id\": \"{{cart_id}}\",\n\t\"product_id\": {{product_id}},\n\t\"attributes\": \"Size, M\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/shoppingcart/add",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shoppingcart",
+								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Create order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0a6f9aa8-7d34-4297-a97a-abc9b2ee7111",
+								"exec": [
+									"if(responseCode.code === 200) {",
+									"    const response = JSON.parse(responseBody);",
+									"    pm.environment.set(\"order_id\", response.order_id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cart_id\": \"{{cart_id}}\",\n\t\"customer_id\": {{customer_id}},\n\t\"shipping_id\": {{shipping_region_id}},\n\t\"tax_id\": {{tax_id}}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/orders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get order info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0a6f9aa8-7d34-4297-a97a-abc9b2ee7111",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/orders/{{order_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orders",
+								"{{order_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get orders by customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0a6f9aa8-7d34-4297-a97a-abc9b2ee7111",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/orders/inCustomer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orders",
+								"inCustomer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get orders short detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0a6f9aa8-7d34-4297-a97a-abc9b2ee7111",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/orders/shortDetail/{{order_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orders",
+								"shortDetail",
+								"{{order_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stripe",
+			"item": [
+				{
+					"name": "Create charge",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"stripeToken\": \"{{stripe_token}}\",\n\t\"order_id\": {{order_id}},\n\t\"description\": \"Order for Haute Couture\",\n\t\"amount\": 399,\n\t\"currency\": \"usd\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/stripe/charge",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stripe",
+								"charge"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
