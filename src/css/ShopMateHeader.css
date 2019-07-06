@@ -1,0 +1,44 @@
+.signIn {
+    color: #f30965 !important;
+    font-weight: 800 !important;
+    font-size: 15px;
+    cursor: pointer;
+    float: left;
+    top: 10px;
+}
+
+.register {
+    color: #f30965 !important;
+    font-weight: 800 !important;
+    font-size: 15px;
+    cursor: pointer;
+    float: left;
+    top: 10px;
+}
+
+.headerText{
+    padding-top: 21px;
+    font-weight: bold;
+    float: left;
+}
+
+.headerIcon {
+    padding-top: 7px;
+}
+
+.cartNumber {
+    top: 32% !important;
+    left: 40% !important;
+    font-size: 0.75em !important;
+}
+
+.bagText {
+    top: 4%;
+    height: 0px;
+    margin-left: 11px;
+    font-weight: bold;
+}
+
+.guestLeftMenu {
+    display:'inherit' !important;
+}

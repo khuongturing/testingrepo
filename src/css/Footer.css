@@ -1,0 +1,21 @@
+.footerBar {
+    background-color: black !important;
+    color:white ;
+    padding-left: 21% !important;
+}
+
+.iconFooter{
+    margin-left: 10% !important;
+    cursor: pointer;
+}
+
+.footerDiv{
+    display: flex;
+    flex-direction: row;
+    padding-left: 10% !important;
+}
+
+.footerSpan {
+    margin-left: 7% !important;    
+    margin-top: 2.2% !important;
+}

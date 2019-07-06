@@ -1,0 +1,39 @@
+.mainCartDiv{
+    height: 40em;
+}
+
+.cartTable {
+    width: 70% !important;
+    margin-left: 14% !important;
+}
+
+.qtySpan {
+    margin: 10px !important;
+}
+
+.cartTopDiv{
+    width: 70% !important;
+    height: 5em !important;
+    margin-left: 14% !important;
+}
+
+.totalLabel{
+    padding-left: 36%;
+    font-weight: 900;
+    color: #f30965;
+    font-size:21px;    
+}
+
+.incCart, .decCart {
+    background-color: #f30965 !important;
+}
+
+.cartButton, .orderButton, .cartRemoveButton {
+    color: white !important;
+    background-color: #f30965 !important;
+}
+
+.tableDiv {
+    overflow-y: scroll;
+    height: 35em;
+}

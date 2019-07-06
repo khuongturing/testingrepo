@@ -1,0 +1,41 @@
+.appdiv{
+    width: 94vw !important;
+}
+
+.leftSideBar{
+    position: relative !important;
+    cursor: pointer;
+    font-size: 1.2em !important;
+    margin-top: 5% !important;
+    font-weight: bold !important;
+}
+
+.listHeight{
+    height: 75vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.pageDiv{
+    margin-top: -0.5% !important;
+    margin-bottom: 0.25% !important;
+    border:none !important;
+    box-shadow: 0px !important;
+    -webkit-box-shadow: 0px !important;
+}
+
+.categoryText{
+    font-size: 1.8em;
+    margin-top: 6%;
+    border-bottom: 3px solid #f30965;
+    box-shadow: 0px !important;
+}
+
+.pageNoStart{
+    position: absolute;
+    left: 50%;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+

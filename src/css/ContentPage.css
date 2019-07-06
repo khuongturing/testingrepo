@@ -1,0 +1,10 @@
+.pageStart {
+    margin-left: 482%;
+    border: none !important;
+}
+
+.ui.menu {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+}
