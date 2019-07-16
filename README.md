@@ -1,41 +1,47 @@
-# Turing Back End Challenge
-To complete this challenge, you need to ensure all route returns a similar response object as described in our API guide.
-To achieve this goal
-- You will have to fix the existing bugs
-- Implement the incomplete functions,
-- Add test cases for the main functions of the system.
-- Add Dockerfile to the root of the project to run the app in docker environment
+#tshirt
 
+Tshirt is a backend app built with Nodejs and Express framework.
 
-## Getting started
+## Feature
 
-### Prerequisites
+- Users can view all items when entering the website
+- Items are displayed properly based on the selected department and category
+- Users can search items through search box
+- Support paging if we have too many items
+- Users can see item details by selecting a specific item
+- Users can add items to their shopping carts
+- Users can register/login using website custom forms, or social login libraries
+- Users can update personal profiles with shipping addresses and other info
+- Users can checkout with 3rd party payment gateways: Paypal, Stripe. This requirement is mandatory, you must use the related APIs for the payment.
+- Users will get confirmations over emails about their orders
+- Clear unused shopping cart frequently
 
-In order to install and run this project locally, you would need to have the following installed on you local machine.
+## Technology needed to run the project locally
 
-* [**Node JS**](https://nodejs.org/en/)
-* [**Express**](https://expressjs.com/)
-* [**MySQL**](https://www.mysql.com/downloads/)
+- Any text editor preferably Visual Studio Code
+- Git Bash or any CLI tool
+- Postman
 
-### Installation
+## Link to App on Heroku
 
-* Clone this repository
+https://tshirt-rexben.herokuapp.com/
 
-* Navigate to the project directory
+## Link to API documentation
 
-* Run `npm install` or `yarn` to instal the projects dependencies
-* create a `.env` file and copy the contents of the `.env.sample` file into it and supply the values for each variable
+https://tshirt-rexben.herokuapp.com/api/v1/docs
 
-```sh
-cp .env.sample .env
-```
-* Create a MySQL database and run the `sql` file in the database directory to migrate the database
+## How to Clone project
 
-```sh
-mysql -u <dbuser> -D <databasename> -p < ./src/database/database.sql
-```
+To clone this repository:
 
-* Run `npm run dev` to start the app in development
+- git clone https://github.com/Rexben001/tshirt.git
 
-## Request and Response Object API guide for all Endpoints
-Check [here](https://docs.google.com/document/d/1J12z1vPo8S5VEmcHGNejjJBOcqmPrr6RSQNdL58qJyE/edit?usp=sharing)
+## How to test the API endpoints
+
+- `npm i` to install the npm packages
+- `npm run start:dev` to start the server
+- `npm test` to run the test files
+
+## Author
+
+- Ajewole Benjamin

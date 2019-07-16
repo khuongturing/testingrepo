@@ -1,29 +1,30 @@
-const instances = {
-    development: 1,
-    staging: 2,
-    production: 3
-};
-
 module.exports = {
-    apps: [{
-        name: 'turing-api',
-        script: 'dist/index.js',
+  apps : [{
+    name: 'API',
+    script: 'babel-node index.js',
 
-        // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
-        instances: instances[process.env.NODE_ENV],
-        watch: true,
-        ignore_watch: ['node_modules'],
-        autorestart: true,
-        max_restarts: 1,
-        max_memory_restart: '1G',
-        env: {
-            NODE_ENV: 'development'
-        },
-        env_staging: {
-            NODE_ENV: 'staging'
-        },
-        env_production: {
-            NODE_ENV: 'production'
-        }
-    }],
+    // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
+    args: 'one two',
+    instances: 1,
+    autorestart: true,
+    watch: false,
+    max_memory_restart: '1G',
+    env: {
+      NODE_ENV: 'development'
+    },
+    env_production: {
+      NODE_ENV: 'production'
+    }
+  }],
+
+  deploy : {
+    production : {
+      user : 'node',
+      host : '212.83.163.1',
+      ref  : 'origin/master',
+      repo : 'git@github.com:repo.git',
+      path : '/var/www/production',
+      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
+    }
+  }
 };
