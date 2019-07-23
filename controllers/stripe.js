@@ -1,39 +1,34 @@
-import { config } from "dotenv";
-import stripeAuth from "stripe";
+let stripe = require('stripe')(process.env.STRIPE_KEY);
+let filter = require('express-validator/filter');
+let validatorErrorFormatter = require('../handlers/validation-error-formatter');
 
-config();
-const stripe = stripeAuth(process.env.STRIPE_SECRET_KEY);
-/**
- *
- *
- * @class Payment
- */
-class Payment {
-  /**
-   *
-   *
-   * @static
-   * @description charge a customer using stripe
-   * @param {*} req for request object
-   * @param {*} res for response object
-   * @returns returns a response object
-   * @memberof Payment
-   */
-  static charge(req, res) {
-    const { stripeToken, order_id, description, amount, currency } = req.body;
+// import Error classes
+let RecordNotFoundError = require('../errors/record-not-found-error');
+let ValidationError = require('../errors/validation-error');
 
-    stripe.charges
-      .create({
+module.exports = {
+  charge: (req, res, next) => {
+    let result = validatorErrorFormatter(req);
+    if (result.isEmpty()) { 
+      const { stripeToken, order_id, description, amount, currency } = filter.matchedData(req, {locations: ['body']});
+
+      stripe.charges.create({
         amount,
+        currency,
         description,
-        currency: currency || "usd",
-        source: stripeToken
+        source: stripeToken,
+        metadata: {order_id},
       })
-      .then(charge => res.status(200).json({ charge }))
-      .catch(error => console.log(error));
+      .then(charge => res.json(charge))
+      .catch(next);
+    } else {
+      next(new ValidationError('Validation failed!', result));
+    }
+  },
+  
+  webhooks: (req, res, next) => {
+    res.json({});
   }
 
-  static webHooks(req, res) {}
-}
+};
 
-export default Payment;
