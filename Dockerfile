@@ -1,28 +1,36 @@
-FROM node:8
+FROM mysql:5.7
+MAINTAINER Peter Adeoye <peter.a@turing.com>
 
-# Create app directory
-WORKDIR /usr/src/app
+# SETUP DATABASES
+ENV MYSQL_DATABASE 'turing'
+ENV MYSQL_ROOT_PASSWORD 'root'
+ENV MYSQL_USER 'turing'
+ENV MYSQL_PASSWORD 'turing'
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json yarn.lock ./
+COPY ./database/dump.sql /docker-entrypoint-initdb.d/dump.sql
 
-RUN \
-    apt-get update && \
-    apt-get -y install mysql-client && \
-    npm install -g nodemon mocha nyc snyk pm2 && \
-    yarn
-# If you are building your code for production
-# RUN npm ci --only=production
+ENV NODE_ENV=development
+COPY package.json package-lock.json ./
 
-# Bundle app source
+RUN apt-get update && \
+    apt-get install curl software-properties-common make -y && \
+    curl -sL https://deb.nodesource.com/setup_12.x | bash -
+
+RUN apt-get update && \
+    apt-get install -y \
+    nodejs
+
+RUN apt-get install build-essential -y
+
+RUN mkdir /backend
+WORKDIR /
+
+COPY package-*.json .
+RUN npm install
+
 COPY . .
 
-EXPOSE 8080
+EXPOSE 80
+COPY turing-entrypoint.sh /turing-entrypoint.sh
 
-# Show current folder structure in logs
-# RUN ls -al -R
-
-CMD [ "pm2-runtime", "start", "ecosystem.config.js" ]
-# CMD ["npm", "start"]
+CMD ["sh", "turing-entrypoint.sh"]
