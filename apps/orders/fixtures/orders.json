@@ -1,0 +1,42 @@
+[
+  {
+    "model": "orders.order",
+    "pk": 1,
+    "fields": {
+      "total_amount": "45.93",
+      "created_on": "2019-08-01T20:56:22.827Z",
+      "shipped_on": null,
+      "status": 0,
+      "comments": null,
+      "customer": 2,
+      "auth_code": null,
+      "reference": null,
+      "shipping": 1,
+      "tax": 1
+    }
+  },
+  {
+    "model": "orders.orderdetail",
+    "pk": 1,
+    "fields": {
+      "order": 1,
+      "product": 1,
+      "attributes": "bla bla",
+      "product_name": "Arc d'Triomphe",
+      "quantity": 2,
+      "unit_cost": "14.99"
+    }
+  },
+  {
+    "model": "orders.orderdetail",
+    "pk": 2,
+    "fields": {
+      "order": 1,
+      "product": 2,
+      "attributes": "attr",
+      "product_name": "Chartres Cathedral",
+      "quantity": 1,
+      "unit_cost": "15.95"
+    }
+  }
+]

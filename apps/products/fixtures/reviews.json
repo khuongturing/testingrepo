@@ -1,0 +1,35 @@
+[
+  {
+    "model": "products.review",
+    "pk": 1,
+    "fields": {
+      "customer": 2,
+      "product": 1,
+      "review": "good product",
+      "rating": 5,
+      "created_on": "2019-08-02T03:38:53.165Z"
+    }
+  },
+  {
+    "model": "products.review",
+    "pk": 2,
+    "fields": {
+      "customer": 2,
+      "product": 2,
+      "review": "an average product",
+      "rating": 3,
+      "created_on": "2019-08-02T03:42:18.794Z"
+    }
+  },
+  {
+    "model": "products.review",
+    "pk": 3,
+    "fields": {
+      "customer": 2,
+      "product": 1,
+      "review": "a test review",
+      "rating": 4,
+      "created_on": "2019-08-02T03:43:16.372Z"
+    }
+  }
+]

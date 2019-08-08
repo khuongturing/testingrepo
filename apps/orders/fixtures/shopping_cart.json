@@ -1,0 +1,26 @@
+[
+  {
+    "model": "orders.shoppingcart",
+    "pk": 1,
+    "fields": {
+      "cart_id": "EaDEgmYjhg1Y0HKRydrwti3dfYP3Vd",
+      "product": 1,
+      "attributes": "bla bla",
+      "quantity": 2,
+      "buy_now": false,
+      "added_on": "2019-07-31T21:32:49.132Z"
+    }
+  },
+  {
+    "model": "orders.shoppingcart",
+    "pk": 2,
+    "fields": {
+      "cart_id": "EaDEgmYjhg1Y0HKRydrwti3dfYP3Vd",
+      "product": 2,
+      "attributes": "attr",
+      "quantity": 1,
+      "buy_now": false,
+      "added_on": "2019-08-01T20:50:49.079Z"
+    }
+  }
+]

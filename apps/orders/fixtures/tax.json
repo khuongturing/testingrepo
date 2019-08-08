@@ -1,0 +1,18 @@
+[
+  {
+    "model": "orders.tax",
+    "pk": 1,
+    "fields": {
+      "tax_type": "Sales Tax at 8.5%",
+      "tax_percentage": "8.50"
+    }
+  },
+  {
+    "model": "orders.tax",
+    "pk": 2,
+    "fields": {
+      "tax_type": "No Tax",
+      "tax_percentage": "0.00"
+    }
+  }
+]

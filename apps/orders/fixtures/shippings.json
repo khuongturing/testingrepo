@@ -1,0 +1,65 @@
+[
+  {
+    "model": "orders.shipping",
+    "pk": 1,
+    "fields": {
+      "shipping_type": "Next Day Delivery ($20)",
+      "shipping_cost": "20.00",
+      "shipping_region": 2
+    }
+  },
+  {
+    "model": "orders.shipping",
+    "pk": 2,
+    "fields": {
+      "shipping_type": "3-4 Days ($10)",
+      "shipping_cost": "10.00",
+      "shipping_region": 2
+    }
+  },
+  {
+    "model": "orders.shipping",
+    "pk": 3,
+    "fields": {
+      "shipping_type": "7 Days ($5)",
+      "shipping_cost": "5.00",
+      "shipping_region": 2
+    }
+  },
+  {
+    "model": "orders.shipping",
+    "pk": 4,
+    "fields": {
+      "shipping_type": "By air (7 days, $25)",
+      "shipping_cost": "25.00",
+      "shipping_region": 3
+    }
+  },
+  {
+    "model": "orders.shipping",
+    "pk": 5,
+    "fields": {
+      "shipping_type": "By sea (28 days, $10)",
+      "shipping_cost": "10.00",
+      "shipping_region": 3
+    }
+  },
+  {
+    "model": "orders.shipping",
+    "pk": 6,
+    "fields": {
+      "shipping_type": "By air (10 days, $35)",
+      "shipping_cost": "35.00",
+      "shipping_region": 4
+    }
+  },
+  {
+    "model": "orders.shipping",
+    "pk": 7,
+    "fields": {
+      "shipping_type": "By sea (28 days, $30)",
+      "shipping_cost": "30.00",
+      "shipping_region": 4
+    }
+  }
+]

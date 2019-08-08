@@ -1,0 +1,56 @@
+[
+  {
+    "model": "users.customer",
+    "pk": 2,
+    "fields": {
+      "user": 3,
+      "credit_card": null,
+      "address_1": null,
+      "address_2": null,
+      "city": null,
+      "region": null,
+      "postal_code": null,
+      "country": null,
+      "day_phone": "01234556",
+      "eve_phone": "485349583",
+      "mob_phone": null,
+      "shipping_region": 1
+    }
+  },
+  {
+    "model": "users.customer",
+    "pk": 3,
+    "fields": {
+      "user": 4,
+      "credit_card": "1234567887654321",
+      "address_1": "90 Bedford St",
+      "address_2": null,
+      "city": "New York",
+      "region": "New York",
+      "postal_code": "10014",
+      "country": "USA",
+      "day_phone": "123456789",
+      "eve_phone": null,
+      "mob_phone": null,
+      "shipping_region": 2
+    }
+  },
+  {
+    "model": "users.customer",
+    "pk": 4,
+    "fields": {
+      "user": 5,
+      "credit_card": "1234567812345678",
+      "address_1": "90 Bedford St",
+      "address_2": null,
+      "city": "New York",
+      "region": "New York",
+      "postal_code": "10014",
+      "country": "USA",
+      "day_phone": null,
+      "eve_phone": "123456779",
+      "mob_phone": null,
+      "shipping_region": 2
+    }
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$QqWeLa9iV6GF$PmiIPEDcDtJD1/JML4nmZMh9yPOrDWb+OagZgIeckAg=",
+      "last_login": "2019-07-31T10:39:25.927Z",
+      "is_superuser": true,
+      "name": "",
+      "email": "fahad.noor91@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2019-07-30T17:47:31.882Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$R8IZlAGMCeNp$a7Pd3wjk81UXk1njC9VDd9wjCTzhCcmdtgOkoENirho=",
+      "last_login": "2019-07-31T14:55:57.551Z",
+      "is_superuser": false,
+      "name": "Toey Tribbiani",
+      "email": "joey@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2019-07-30T17:49:27.194Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$pz7Y1dQGSLgj$ouEqRPG8pxdqxvNPpX3ZMIQvmy3a06rXDnoJkYRTYhg=",
+      "last_login": "2019-07-31T12:40:31.031Z",
+      "is_superuser": false,
+      "name": "Chandler Bing",
+      "email": "chandlerbing@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2019-07-31T10:39:38Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$vjNkSIs6Tewv$/vizCEOtmd/bainNyAAbf3srytumF46euDyiEgKAlrE=",
+      "last_login": "2019-07-31T12:39:03.820Z",
+      "is_superuser": false,
+      "name": "Monica Geller",
+      "email": "monicageller@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2019-07-31T10:42:24Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

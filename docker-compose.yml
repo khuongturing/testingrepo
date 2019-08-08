@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3406:3306"
+    expose:
+      - "3406"
+    restart: always
+    volumes:
+      - "./mysql:/var/lib/mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=tshirtshop
+      - MYSQL_PASSWORD=root
+
+  web:
+    restart: always
+    build: .
+    command: >
+      bash -c "./wait-for.sh -t 30 db:3306 -- python manage.py migrate
+      && python manage.py loaddata attributes_values categories departments products product_attributes
+      product_categories shipping_regions tax shippings --format json
+      && python manage.py collectstatic --no-input && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db

@@ -1,0 +1,30 @@
+[
+  {
+    "model": "orders.shippingregion",
+    "pk": 1,
+    "fields": {
+      "shipping_region": "Please Select"
+    }
+  },
+  {
+    "model": "orders.shippingregion",
+    "pk": 2,
+    "fields": {
+      "shipping_region": "US / Canada"
+    }
+  },
+  {
+    "model": "orders.shippingregion",
+    "pk": 3,
+    "fields": {
+      "shipping_region": "Europe"
+    }
+  },
+  {
+    "model": "orders.shippingregion",
+    "pk": 4,
+    "fields": {
+      "shipping_region": "Rest of World"
+    }
+  }
+]

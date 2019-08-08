@@ -1,0 +1,128 @@
+[
+  {
+    "model": "products.attribute",
+    "pk": 1,
+    "fields": {
+      "name": "Size"
+    }
+  },
+  {
+    "model": "products.attribute",
+    "pk": 2,
+    "fields": {
+      "name": "Color"
+    }
+  },
+  {
+    "model": "products.attributevalue",
+    "pk": 1,
+    "fields": {
+      "attribute": 1,
+      "value": "S"
+    }
+  },
+  {
+    "model": "products.attributevalue",
+    "pk": 2,
+    "fields": {
+      "attribute": 1,
+      "value": "M"
+    }
+  },
+  {
+    "model": "products.attributevalue",
+    "pk": 3,
+    "fields": {
+      "attribute": 1,
+      "value": "L"
+    }
+  },
+  {
+    "model": "products.attributevalue",
+    "pk": 4,
+    "fields": {
+      "attribute": 1,
+      "value": "XL"
+    }
+  },
+  {
+    "model": "products.attributevalue",
+    "pk": 5,
+    "fields": {
+      "attribute": 1,
+      "value": "XXL"
+    }
+  },
+  {
+    "model": "products.attributevalue",
+    "pk": 6,
+    "fields": {
+      "attribute": 2,
+      "value": "White"
+    }
+  },
+  {
+    "model": "products.attributevalue",
+    "pk": 7,
+    "fields": {
+      "attribute": 2,
+      "value": "Black"
+    }
+  },
+  {
+    "model": "products.attributevalue",
+    "pk": 8,
+    "fields": {
+      "attribute": 2,
+      "value": "Red"
+    }
+  },
+  {
+    "model": "products.attributevalue",
+    "pk": 9,
+    "fields": {
+      "attribute": 2,
+      "value": "Orange"
+    }
+  },
+  {
+    "model": "products.attributevalue",
+    "pk": 10,
+    "fields": {
+      "attribute": 2,
+      "value": "Yellow"
+    }
+  },
+  {
+    "model": "products.attributevalue",
+    "pk": 11,
+    "fields": {
+      "attribute": 2,
+      "value": "Green"
+    }
+  },
+  {
+    "model": "products.attributevalue",
+    "pk": 12,
+    "fields": {
+      "attribute": 2,
+      "value": "Blue"
+    }
+  },
+  {
+    "model": "products.attributevalue",
+    "pk": 13,
+    "fields": {
+      "attribute": 2,
+      "value": "Indigo"
+    }
+  },
+  {
+    "model": "products.attributevalue",
+    "pk": 14,
+    "fields": {
+      "attribute": 2,
+      "value": "Purple"
+    }
+  }
+]
